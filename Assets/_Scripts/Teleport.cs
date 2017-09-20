@@ -54,12 +54,19 @@ public class Teleport : MonoBehaviour {
 //			Debug.DrawLine (cam.transform.position, hit.point, Color.red, 2f);
 			if (hit.transform.gameObject.layer == 8) {
 //				tCursor.transform.position = hit.point;
+				if(!tCursor.activeSelf){
+					tCursor.SetActive (true);
+				}
 				tCursor.transform.position = Vector3.SmoothDamp (tCursor.transform.position, hit.point, ref tCursor_velocity, 0.25f);
-			}
-			if (Input.GetMouseButtonDown (0)) {
-//				transform.position = hit.point;
-				tDestiny = tCursor.transform.position;
-				StartCoroutine ("TeleportTo");
+				if (Input.GetMouseButtonDown (0)) {
+					//				transform.position = hit.point;
+					tDestiny = tCursor.transform.position;
+					StartCoroutine ("TeleportTo");
+				}
+			} else {
+				if(tCursor.activeSelf){
+					tCursor.SetActive (false);
+				}
 			}
 		}
 		if (canWarp) {
@@ -81,6 +88,7 @@ public class Teleport : MonoBehaviour {
 			} else {					 
 				step -= Time.deltaTime * speed*2;
 			}
+			glitch.enabled = true;
 			glitch.scanLineJitter = step/2;
 			glitch.colorDrift = step;
 //			bloom.intensity = step*10;
@@ -105,6 +113,7 @@ public class Teleport : MonoBehaviour {
 		glitch.scanLineJitter = 0;
 		glitch.horizontalShake = 0;
 		glitch.colorDrift = 0;
+		glitch.enabled = false;
 //		bloom.intensity = 0;
 //		vignette.intensity = 0;
 		ppBloom.bloom.intensity = 0;
