@@ -1,0 +1,204 @@
+fileFormatVersion: 2
+guid: 54be09f217078764f863b745189a05d7
+timeCreated: 1503884820
+licenseType: Free
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: Bay_Door_Top
+    100002: Baydoor
+    100004: Baydoor.001
+    100006: Camera
+    100008: Corner
+    100010: Door_L
+    100012: Door_L.001
+    100014: Door_R
+    100016: Door_R.001
+    100018: Floor
+    100020: Lamp
+    100022: Lamp.001
+    100024: Lamp.002
+    100026: //RootNode
+    100028: Level_mock
+    100030: Roof
+    100032: Roof.001
+    100034: Vent
+    100036: Vent.001
+    100038: Wall
+    100040: Wall.002
+    100042: Wall_Door
+    400000: Bay_Door_Top
+    400002: Baydoor
+    400004: Baydoor.001
+    400006: Camera
+    400008: Corner
+    400010: Door_L
+    400012: Door_L.001
+    400014: Door_R
+    400016: Door_R.001
+    400018: Floor
+    400020: Lamp
+    400022: Lamp.001
+    400024: Lamp.002
+    400026: //RootNode
+    400028: Level_mock
+    400030: Roof
+    400032: Roof.001
+    400034: Vent
+    400036: Vent.001
+    400038: Wall
+    400040: Wall.002
+    400042: Wall_Door
+    2000000: Camera
+    2300000: Bay_Door_Top
+    2300002: Baydoor
+    2300004: Baydoor.001
+    2300006: Corner
+    2300008: Door_L
+    2300010: Door_L.001
+    2300012: Door_R
+    2300014: Door_R.001
+    2300016: Floor
+    2300018: Lamp.001
+    2300020: Lamp.002
+    2300022: Level_mock
+    2300024: Roof
+    2300026: Roof.001
+    2300028: Vent
+    2300030: Vent.001
+    2300032: Wall
+    2300034: Wall.002
+    2300036: Wall_Door
+    3300000: Bay_Door_Top
+    3300002: Baydoor
+    3300004: Baydoor.001
+    3300006: Corner
+    3300008: Door_L
+    3300010: Door_L.001
+    3300012: Door_R
+    3300014: Door_R.001
+    3300016: Floor
+    3300018: Lamp.001
+    3300020: Lamp.002
+    3300022: Level_mock
+    3300024: Roof
+    3300026: Roof.001
+    3300028: Vent
+    3300030: Vent.001
+    3300032: Wall
+    3300034: Wall.002
+    3300036: Wall_Door
+    4300000: Roof
+    4300002: Floor
+    4300004: Wall
+    4300006: Door_R
+    4300008: Baydoor
+    4300010: Vent
+    4300012: Lamp.001
+    4300014: Level_mock
+    4300016: Door_L
+    4300018: Corner
+    4300020: Wall_Door
+    4300022: Door_L.001
+    4300024: Door_R.001
+    4300026: Bay_Door_Top
+    4300028: Baydoor.001
+    4300030: Vent.001
+    4300032: Roof.001
+    4300034: Lamp.002
+    4300036: Wall.002
+    6400000: Bay_Door_Top
+    6400002: Baydoor
+    6400004: Baydoor.001
+    6400006: Corner
+    6400008: Door_L
+    6400010: Door_L.001
+    6400012: Door_R
+    6400014: Door_R.001
+    6400016: Floor
+    6400018: Lamp.001
+    6400020: Lamp.002
+    6400022: Level_mock
+    6400024: Roof
+    6400026: Roof.001
+    6400028: Vent
+    6400030: Vent.001
+    6400032: Wall
+    6400034: Wall.002
+    6400036: Wall_Door
+    10800000: Lamp
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 1
+    importVisibility: 0
+    importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
