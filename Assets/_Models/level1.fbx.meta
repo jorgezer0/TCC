@@ -27,6 +27,11 @@ ModelImporter:
     100038: Wall
     100040: Wall.002
     100042: Wall_Door
+    100044: Door_L.002
+    100046: Door_R.002
+    100048: Wall.001
+    100050: Wall_Door.001
+    100052: Wall_Door.002
     400000: Bay_Door_Top
     400002: Baydoor
     400004: Baydoor.001
@@ -49,6 +54,11 @@ ModelImporter:
     400038: Wall
     400040: Wall.002
     400042: Wall_Door
+    400044: Door_L.002
+    400046: Door_R.002
+    400048: Wall.001
+    400050: Wall_Door.001
+    400052: Wall_Door.002
     2000000: Camera
     2300000: Bay_Door_Top
     2300002: Baydoor
@@ -69,6 +79,11 @@ ModelImporter:
     2300032: Wall
     2300034: Wall.002
     2300036: Wall_Door
+    2300038: Door_L.002
+    2300040: Door_R.002
+    2300042: Wall.001
+    2300044: Wall_Door.001
+    2300046: Wall_Door.002
     3300000: Bay_Door_Top
     3300002: Baydoor
     3300004: Baydoor.001
@@ -88,6 +103,11 @@ ModelImporter:
     3300032: Wall
     3300034: Wall.002
     3300036: Wall_Door
+    3300038: Door_L.002
+    3300040: Door_R.002
+    3300042: Wall.001
+    3300044: Wall_Door.001
+    3300046: Wall_Door.002
     4300000: Roof
     4300002: Floor
     4300004: Wall
@@ -107,6 +127,11 @@ ModelImporter:
     4300032: Roof.001
     4300034: Lamp.002
     4300036: Wall.002
+    4300038: Wall.001
+    4300040: Door_L.002
+    4300042: Door_R.002
+    4300044: Wall_Door.001
+    4300046: Wall_Door.002
     6400000: Bay_Door_Top
     6400002: Baydoor
     6400004: Baydoor.001
@@ -126,6 +151,11 @@ ModelImporter:
     6400032: Wall
     6400034: Wall.002
     6400036: Wall_Door
+    6400038: Door_L.002
+    6400040: Door_R.002
+    6400042: Wall.001
+    6400044: Wall_Door.001
+    6400046: Wall_Door.002
     10800000: Lamp
   materials:
     importMaterials: 1

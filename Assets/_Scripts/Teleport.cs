@@ -52,6 +52,7 @@ public class Teleport : MonoBehaviour {
 
 		if (Physics.Raycast (cam.transform.position, cam.transform.forward, out hit, distance)) {
 //			Debug.DrawLine (cam.transform.position, hit.point, Color.red, 2f);
+
 			if (hit.transform.gameObject.layer == 8) {
 //				tCursor.transform.position = hit.point;
 				if(!tCursor.activeSelf){
