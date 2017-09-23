@@ -31,21 +31,21 @@ public class DoorBehaviour : MonoBehaviour {
 	}
 
 	public void OpenDoor(){
-		anim.SetBool ("open", true);
-		if (portalsBefore.Count > 0) {
-			for (int i = 0; i < portalsBefore.Count; i++) {
-				portalsBefore [i].open = true;
-			}
-		}
 		if (portalsAfter.Count > 0) {
 			for (int i = 0; i < portalsAfter.Count; i++) {
-				portalsAfter [i].open = false;
+				portalsAfter [i].open = true;
 			}
 		}
+		anim.SetBool ("open", true);
 	}
 
 	public void CloseDoor(){
 		anim.SetBool ("open", false);
+		if (portalsBefore.Count > 0) {
+			for (int i = 0; i < portalsBefore.Count; i++) {
+				portalsBefore [i].open = false;
+			}
+		}
 	}
 }
 

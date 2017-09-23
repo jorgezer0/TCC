@@ -1285,6 +1285,7 @@ MonoBehaviour:
   - {fileID: 904470692}
   portalsAfter:
   - {fileID: 751034694}
+  - {fileID: 1949695113}
 --- !u!1 &69882124
 GameObject:
   m_ObjectHideFlags: 0
@@ -31509,9 +31510,9 @@ OcclusionPortal:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1949695112}
-  m_Open: 1
-  m_Center: {x: 0.008030415, y: 0.30649757, z: 0.029431343}
-  m_Size: {x: 10.103345, y: 2.8389854, z: 2.8547554}
+  m_Open: 0
+  m_Center: {x: 0.04172373, y: 0.30649757, z: 0.029431343}
+  m_Size: {x: 10.186542, y: 2.8389854, z: 2.8547554}
 --- !u!4 &1949695114
 Transform:
   m_ObjectHideFlags: 0
