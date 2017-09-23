@@ -16,6 +16,5 @@ public class NavTest : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		nav.destination = player.transform.position;
-		Debug.Log (nav.hasPath);
 	}
 }

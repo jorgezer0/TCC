@@ -77,6 +77,13 @@ public class Teleport : MonoBehaviour {
 			Vector3 normalize = new Vector3 (0, transform.rotation.eulerAngles.y, 0);
 			transform.rotation = Quaternion.Euler (normalize);
 		}
+
+		Debug.Log (OVRInput.GetActiveController().ToString());
+		Debug.Log (OVRInput.IsControllerConnected (OVRInput.Controller.RTrackedRemote));
+		if (OVRInput.IsControllerConnected (OVRInput.Controller.RTrackedRemote)) {
+			Debug.Log ("Controller Conected!");
+			controller.transform.rotation = OVRInput.GetLocalControllerRotation(OVRInput.Controller.RTrackedRemote);
+		}
 	}
 
 	IEnumerator TeleportTo(){

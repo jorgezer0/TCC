@@ -7,6 +7,10 @@ public class DoorBehaviour : MonoBehaviour {
 	Animator anim;
 	public GameObject player;
 	float distance;
+	bool wasOpen = false;
+
+	public List<OcclusionPortal> portalsBefore = new List<OcclusionPortal>();
+	public List<OcclusionPortal> portalsAfter = new List<OcclusionPortal>();
 
 	// Use this for initialization
 	void Start () {
@@ -17,8 +21,9 @@ public class DoorBehaviour : MonoBehaviour {
 	void Update () {
 		distance = (transform.position - player.transform.position).magnitude;
 		//Debug.Log (distance);
-		if (distance < 2) {
+		if ((distance < 2) && (!wasOpen)) {
 			OpenDoor ();
+			wasOpen = true;
 		} else if (distance > 2) {
 			CloseDoor ();
 		}
@@ -27,9 +32,20 @@ public class DoorBehaviour : MonoBehaviour {
 
 	public void OpenDoor(){
 		anim.SetBool ("open", true);
+		if (portalsBefore.Count > 0) {
+			for (int i = 0; i < portalsBefore.Count; i++) {
+				portalsBefore [i].open = true;
+			}
+		}
+		if (portalsAfter.Count > 0) {
+			for (int i = 0; i < portalsAfter.Count; i++) {
+				portalsAfter [i].open = false;
+			}
+		}
 	}
 
 	public void CloseDoor(){
 		anim.SetBool ("open", false);
 	}
 }
+
