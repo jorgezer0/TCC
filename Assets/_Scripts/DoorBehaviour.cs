@@ -24,7 +24,7 @@ public class DoorBehaviour : MonoBehaviour {
 		if ((distance < 2) && (!wasOpen)) {
 			OpenDoor ();
 			wasOpen = true;
-		} else if (distance > 2) {
+		} else if ((distance > 2) && (wasOpen)) {
 			CloseDoor ();
 		}
 		
