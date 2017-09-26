@@ -12,6 +12,8 @@ public class Teleport : MonoBehaviour {
 	RaycastHit hit;
 
 	public GameObject controller;
+	public LineRenderer line;
+	public Transform rayOrigin;
 
 	public GameObject tCursor;
 	private Vector3 tCursor_velocity = Vector3.zero;
@@ -45,44 +47,77 @@ public class Teleport : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+
 		deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
 		transform.Rotate(0, Input.GetAxis ("Mouse X") * rotateSpeed, 0);
 		cam.transform.Rotate(-Input.GetAxis ("Mouse Y") * rotateSpeed, 0, 0);
 
+		if (OVRInput.IsControllerConnected (OVRInput.Controller.RTrackedRemote)) {
+			Debug.Log ("Controller Conected!");
+//			if (!controller.activeSelf) {
+//				controller.SetActive (true);
+//			}
 
-		if (Physics.Raycast (cam.transform.position, cam.transform.forward, out hit, distance)) {
+			controller.transform.rotation = OVRInput.GetLocalControllerRotation(OVRInput.Controller.RTrackedRemote);
+
+			if (Physics.Raycast (rayOrigin.position, rayOrigin.forward, out hit, distance)) {
+				line.SetPosition (0, rayOrigin.position);
+//				line.SetPosition (1, hit.point);
+
+				if (hit.transform.gameObject.layer == 8) {
+					//				tCursor.transform.position = hit.point;
+					if (!tCursor.activeSelf) {
+						tCursor.SetActive (true);
+					}
+					tCursor.transform.position = Vector3.SmoothDamp (tCursor.transform.position, hit.point, ref tCursor_velocity, 0.25f);
+					line.SetPosition (1, tCursor.transform.position);
+					if (Input.GetMouseButtonDown (0)) {
+						//				transform.position = hit.point;
+						tDestiny = tCursor.transform.position;
+						StartCoroutine ("TeleportTo");
+					}
+				} else {
+					if (tCursor.activeSelf) {
+						tCursor.SetActive (false);
+					}
+				}
+			}
+
+		} else {
+			Debug.Log ("Controller Disconected!");
+//			if (controller.activeSelf) {
+//				controller.SetActive (false);
+//			}
+			if (Physics.Raycast (cam.transform.position, cam.transform.forward, out hit, distance)) {
 //			Debug.DrawLine (cam.transform.position, hit.point, Color.red, 2f);
+				line.SetPosition (0, rayOrigin.position);
 
-			if (hit.transform.gameObject.layer == 8) {
+				if (hit.transform.gameObject.layer == 8) {
 //				tCursor.transform.position = hit.point;
-				if(!tCursor.activeSelf){
-					tCursor.SetActive (true);
-				}
-				tCursor.transform.position = Vector3.SmoothDamp (tCursor.transform.position, hit.point, ref tCursor_velocity, 0.25f);
-				if (Input.GetMouseButtonDown (0)) {
-					//				transform.position = hit.point;
-					tDestiny = tCursor.transform.position;
-					StartCoroutine ("TeleportTo");
-				}
-			} else {
-				if(tCursor.activeSelf){
-					tCursor.SetActive (false);
+					if (!tCursor.activeSelf) {
+						tCursor.SetActive (true);
+					}
+					tCursor.transform.position = Vector3.SmoothDamp (tCursor.transform.position, hit.point, ref tCursor_velocity, 0.25f);
+					line.SetPosition (1, tCursor.transform.position);
+					if (Input.GetMouseButtonDown (0)) {
+						//				transform.position = hit.point;
+						tDestiny = tCursor.transform.position;
+						StartCoroutine ("TeleportTo");
+					}
+				} else {
+					if (tCursor.activeSelf) {
+						tCursor.SetActive (false);
+					}
 				}
 			}
 		}
 		if (canWarp) {
 			pProces.motionBlur.enabled = true;
 			transform.position = Vector3.SmoothDamp (transform.position, tDestiny, ref vel, warpTime);
+			OVRInput.RecenterController (OVRInput.Controller.Active);
 			transform.LookAt (focusManager.GetFocus ());
 			Vector3 normalize = new Vector3 (0, transform.rotation.eulerAngles.y, 0);
 			transform.rotation = Quaternion.Euler (normalize);
-		}
-
-		Debug.Log (OVRInput.GetActiveController().ToString());
-		Debug.Log (OVRInput.IsControllerConnected (OVRInput.Controller.RTrackedRemote));
-		if (OVRInput.IsControllerConnected (OVRInput.Controller.RTrackedRemote)) {
-			Debug.Log ("Controller Conected!");
-			controller.transform.rotation = OVRInput.GetLocalControllerRotation(OVRInput.Controller.RTrackedRemote);
 		}
 	}
 
@@ -101,7 +136,7 @@ public class Teleport : MonoBehaviour {
 			glitch.colorDrift = step;
 //			bloom.intensity = step*10;
 //			vignette.intensity = step;
-			ppBloom.bloom.intensity = step;
+			ppBloom.bloom.intensity = step/2;
 			ppChromatic.intensity = step;
 			ppVignette.intensity = step;
 			pProces.bloom.settings = ppBloom;
