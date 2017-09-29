@@ -61,10 +61,10 @@ public class Teleport : MonoBehaviour {
 			controller.transform.rotation = OVRInput.GetLocalControllerRotation(OVRInput.Controller.RTrackedRemote);
 
 			if (Physics.Raycast (rayOrigin.position, rayOrigin.forward, out hit, distance)) {
-				line.SetPosition (0, rayOrigin.position);
 //				line.SetPosition (1, hit.point);
 
 				if (hit.transform.gameObject.layer == 8) {
+					line.SetPosition (0, rayOrigin.position);
 					//				tCursor.transform.position = hit.point;
 					if (!tCursor.activeSelf) {
 						tCursor.SetActive (true);
@@ -79,6 +79,8 @@ public class Teleport : MonoBehaviour {
 				} else {
 					if (tCursor.activeSelf) {
 						tCursor.SetActive (false);
+						line.SetPosition (0, transform.position);
+						line.SetPosition (1, transform.position);
 					}
 				}
 			}
@@ -90,9 +92,9 @@ public class Teleport : MonoBehaviour {
 //			}
 			if (Physics.Raycast (cam.transform.position, cam.transform.forward, out hit, distance)) {
 //			Debug.DrawLine (cam.transform.position, hit.point, Color.red, 2f);
-				line.SetPosition (0, rayOrigin.position);
 
 				if (hit.transform.gameObject.layer == 8) {
+					line.SetPosition (0, rayOrigin.position);
 //				tCursor.transform.position = hit.point;
 					if (!tCursor.activeSelf) {
 						tCursor.SetActive (true);
@@ -107,6 +109,8 @@ public class Teleport : MonoBehaviour {
 				} else {
 					if (tCursor.activeSelf) {
 						tCursor.SetActive (false);
+						line.SetPosition (0, transform.localPosition);
+						line.SetPosition (1, transform.position);
 					}
 				}
 			}
