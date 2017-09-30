@@ -11,6 +11,7 @@ public class Teleport : MonoBehaviour {
 	public float rotateSpeed = 2;
 	RaycastHit hit;
 
+	public GameObject cursorCanvas;
 	public GameObject controller;
 	public LineRenderer line;
 	public Transform rayOrigin;
@@ -36,6 +37,9 @@ public class Teleport : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+//		Time.timeScale = 0.5f;
+
 		glitch = cam.GetComponent<AnalogGlitch> ();
 		vignette = cam.GetComponent<Vignette> ();
 		bloom = cam.GetComponent<Bloom> ();
@@ -54,71 +58,72 @@ public class Teleport : MonoBehaviour {
 
 		if (OVRInput.IsControllerConnected (OVRInput.Controller.RTrackedRemote)) {
 			Debug.Log ("Controller Conected!");
-//			if (!controller.activeSelf) {
-//				controller.SetActive (true);
-//			}
-
-			controller.transform.rotation = OVRInput.GetLocalControllerRotation(OVRInput.Controller.RTrackedRemote);
-
+			cursorCanvas.SetActive (false);
+			controller.transform.localRotation = OVRInput.GetLocalControllerRotation(OVRInput.Controller.RTrackedRemote);
+			Debug.DrawRay (rayOrigin.transform.position, rayOrigin.forward);
 			if (Physics.Raycast (rayOrigin.position, rayOrigin.forward, out hit, distance)) {
 //				line.SetPosition (1, hit.point);
 
-				if (hit.transform.gameObject.layer == 8) {
-					line.SetPosition (0, rayOrigin.position);
-					//				tCursor.transform.position = hit.point;
-					if (!tCursor.activeSelf) {
-						tCursor.SetActive (true);
-					}
-					tCursor.transform.position = Vector3.SmoothDamp (tCursor.transform.position, hit.point, ref tCursor_velocity, 0.25f);
-					line.SetPosition (1, tCursor.transform.position);
-					if (Input.GetMouseButtonDown (0)) {
-						//				transform.position = hit.point;
-						tDestiny = tCursor.transform.position;
-						StartCoroutine ("TeleportTo");
-					}
-				} else {
-					if (tCursor.activeSelf) {
-						tCursor.SetActive (false);
-						line.SetPosition (0, transform.position);
-						line.SetPosition (1, transform.position);
-					}
+				line.SetPosition (0, rayOrigin.position);
+				//				tCursor.transform.position = hit.point;
+				if (!tCursor.activeSelf) {
+					tCursor.SetActive (true);
 				}
+//					tCursor.transform.position = Vector3.SmoothDamp (tCursor.transform.position, hit.point, ref tCursor_velocity, 0.1f);
+				tCursor.transform.position = new Vector3(hit.point.x, 0, hit.point.z);
+				Vector3 dir = new Vector3 (focusManager.GetFocus ().x, 0, focusManager.GetFocus ().z);
+				tCursor.transform.LookAt (dir);
+//				line.SetPosition (1, tCursor.transform.position);
+				line.SetPosition (1, hit.point);
+
+				if (OVRInput.GetDown (OVRInput.Button.PrimaryTouchpad)) {
+					StartCoroutine ("SlowTime");
+				}
+
+				if (OVRInput.GetUp (OVRInput.Button.PrimaryTouchpad)) {
+					StartCoroutine ("NormalTime");
+					tDestiny = tCursor.transform.position;
+					StartCoroutine ("TeleportTo");
+				}
+
 			}
 
 		} else {
 			Debug.Log ("Controller Disconected!");
+			cursorCanvas.SetActive (true);
 //			if (controller.activeSelf) {
 //				controller.SetActive (false);
 //			}
 			if (Physics.Raycast (cam.transform.position, cam.transform.forward, out hit, distance)) {
 //			Debug.DrawLine (cam.transform.position, hit.point, Color.red, 2f);
 
-				if (hit.transform.gameObject.layer == 8) {
-					line.SetPosition (0, rayOrigin.position);
-//				tCursor.transform.position = hit.point;
-					if (!tCursor.activeSelf) {
-						tCursor.SetActive (true);
-					}
-					tCursor.transform.position = Vector3.SmoothDamp (tCursor.transform.position, hit.point, ref tCursor_velocity, 0.25f);
-					line.SetPosition (1, tCursor.transform.position);
-					if (Input.GetMouseButtonDown (0)) {
-						//				transform.position = hit.point;
-						tDestiny = tCursor.transform.position;
-						StartCoroutine ("TeleportTo");
-					}
-				} else {
-					if (tCursor.activeSelf) {
-						tCursor.SetActive (false);
-						line.SetPosition (0, transform.localPosition);
-						line.SetPosition (1, transform.position);
-					}
+				line.SetPosition (0, rayOrigin.position);
+				//				tCursor.transform.position = hit.point;
+				if (!tCursor.activeSelf) {
+					tCursor.SetActive (true);
+				}
+				//					tCursor.transform.position = Vector3.SmoothDamp (tCursor.transform.position, hit.point, ref tCursor_velocity, 0.1f);
+				tCursor.transform.position = new Vector3(hit.point.x, 0, hit.point.z);
+				Vector3 dir = new Vector3 (focusManager.GetFocus ().x, 0, focusManager.GetFocus ().z);
+				tCursor.transform.LookAt (dir);
+				//				line.SetPosition (1, tCursor.transform.position);
+				line.SetPosition (1, hit.point);
+				if (Input.GetMouseButtonDown (0)) {
+					Debug.Log ("Slow...");
+					StartCoroutine ("SlowTime");
+				}
+
+				if (Input.GetMouseButtonUp (0)) {
+					Debug.Log ("normal...");
+					tDestiny = tCursor.transform.position;
+					StartCoroutine ("TeleportTo");
+					StartCoroutine ("NormalTime");
 				}
 			}
 		}
 		if (canWarp) {
 			pProces.motionBlur.enabled = true;
 			transform.position = Vector3.SmoothDamp (transform.position, tDestiny, ref vel, warpTime);
-			OVRInput.RecenterController (OVRInput.Controller.Active);
 			transform.LookAt (focusManager.GetFocus ());
 			Vector3 normalize = new Vector3 (0, transform.rotation.eulerAngles.y, 0);
 			transform.rotation = Quaternion.Euler (normalize);
@@ -131,9 +136,9 @@ public class Teleport : MonoBehaviour {
 		int speed = 5;
 		while (step > 0) {
 			if (grow) {
-				step += Time.deltaTime * speed;
+				step += (deltaTime*Time.timeScale) * speed;
 			} else {					 
-				step -= Time.deltaTime * speed*2;
+				step -= (deltaTime*Time.timeScale) * speed*2;
 			}
 			glitch.enabled = true;
 			glitch.scanLineJitter = step/2;
@@ -154,7 +159,8 @@ public class Teleport : MonoBehaviour {
 				canWarp = true;
 			}
 
-			yield return new WaitForSeconds (1/(deltaTime * 1000f));
+//			yield return new WaitForSeconds (1/((deltaTime/Time.timeScale) * 1000f));
+			yield return new WaitForSeconds (Time.deltaTime/Time.timeScale);
 		}
 		pProces.motionBlur.enabled = false;
 		glitch.scanLineJitter = 0;
@@ -172,4 +178,21 @@ public class Teleport : MonoBehaviour {
 		pProces.vignette.settings = ppVignette;
 		yield return null;
 	}
+
+	IEnumerator SlowTime(){
+		while (Time.timeScale > 0.11f) {
+			Time.timeScale -= 0.1f;
+		}
+		yield return null;
+	}
+
+	IEnumerator NormalTime(){
+//		yield return new WaitForSeconds (2f);
+		while (Time.timeScale < 1f) {
+			Time.timeScale += 0.1f;
+		}
+		Time.timeScale = 1;
+		yield return null;
+	}
 }
+

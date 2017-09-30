@@ -25,7 +25,7 @@ public class NavTest : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		dist = (dest - transform.position).magnitude;
-		Debug.Log (dist);
+//		Debug.Log (dist);
 		if (dist < 2f) {
 			transform.Rotate (0, -90, 0);
 			if (Physics.Raycast (transform.position, transform.forward, out hit, 1000)) {
