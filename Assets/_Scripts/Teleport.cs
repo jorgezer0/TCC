@@ -14,6 +14,7 @@ public class Teleport : MonoBehaviour {
 	public GameObject cursorCanvas;
 	public GameObject controller;
 	public LineRenderer line;
+	public Transform particleLine;
 	public Transform rayOrigin;
 
 	public GameObject tCursor;
@@ -106,6 +107,7 @@ public class Teleport : MonoBehaviour {
 				tCursor.transform.position = new Vector3(hit.point.x, 0, hit.point.z);
 				Vector3 dir = new Vector3 (focusManager.GetFocus ().x, 0, focusManager.GetFocus ().z);
 				tCursor.transform.LookAt (dir);
+				particleLine.LookAt (hit.point);
 				//				line.SetPosition (1, tCursor.transform.position);
 				line.SetPosition (1, hit.point);
 				if (Input.GetMouseButtonDown (0)) {
