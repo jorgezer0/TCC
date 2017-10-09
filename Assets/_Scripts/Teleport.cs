@@ -54,11 +54,14 @@ public class Teleport : MonoBehaviour {
 	void Update () {
 
 		deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
-		transform.Rotate(0, Input.GetAxis ("Mouse X") * rotateSpeed, 0);
-		cam.transform.Rotate(-Input.GetAxis ("Mouse Y") * rotateSpeed, 0, 0);
+
+		if (!OVRInput.IsControllerConnected (OVRInput.Controller.RTrackedRemote)) {
+			transform.Rotate (0, Input.GetAxis ("Mouse X") * rotateSpeed, 0);
+			cam.transform.Rotate (-Input.GetAxis ("Mouse Y") * rotateSpeed, 0, 0);
+		}
 
 		if (OVRInput.IsControllerConnected (OVRInput.Controller.RTrackedRemote)) {
-			Debug.Log ("Controller Conected!");
+//			Debug.Log ("Controller Conected!");
 			cursorCanvas.SetActive (false);
 			controller.transform.localRotation = OVRInput.GetLocalControllerRotation(OVRInput.Controller.RTrackedRemote);
 			Debug.DrawRay (rayOrigin.transform.position, rayOrigin.forward);
@@ -90,7 +93,7 @@ public class Teleport : MonoBehaviour {
 			}
 
 		} else {
-			Debug.Log ("Controller Disconected!");
+//			Debug.Log ("Controller Disconected!");
 			cursorCanvas.SetActive (true);
 //			if (controller.activeSelf) {
 //				controller.SetActive (false);
@@ -182,8 +185,8 @@ public class Teleport : MonoBehaviour {
 	}
 
 	IEnumerator SlowTime(){
-		while (Time.timeScale > 0.11f) {
-			Time.timeScale -= 0.1f;
+		while (Time.timeScale > 0.05f) {
+			Time.timeScale -= 0.05f;
 		}
 		yield return null;
 	}
