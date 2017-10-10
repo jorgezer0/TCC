@@ -77,8 +77,8 @@ public class Teleport : MonoBehaviour {
 				if (!tCursor.activeSelf) {
 					tCursor.SetActive (true);
 				}
-//					tCursor.transform.position = Vector3.SmoothDamp (tCursor.transform.position, hit.point, ref tCursor_velocity, 0.1f);
-				tCursor.transform.position = new Vector3(hit.point.x, 0, hit.point.z);
+				tCursor.transform.position = Vector3.SmoothDamp (tCursor.transform.position, new Vector3(hit.point.x, 0, hit.point.z), ref tCursor_velocity, 0.05f*Time.timeScale);
+//				tCursor.transform.position = new Vector3(hit.point.x, 0, hit.point.z);
 				Vector3 dir = new Vector3 (focusManager.GetFocus ().x, 0, focusManager.GetFocus ().z);
 				tCursor.transform.LookAt (dir);
 //				line.SetPosition (1, tCursor.transform.position);
@@ -110,8 +110,8 @@ public class Teleport : MonoBehaviour {
 				if (!tCursor.activeSelf) {
 					tCursor.SetActive (true);
 				}
-				//					tCursor.transform.position = Vector3.SmoothDamp (tCursor.transform.position, hit.point, ref tCursor_velocity, 0.1f);
-				tCursor.transform.position = new Vector3(hit.point.x, 0, hit.point.z);
+				tCursor.transform.position = Vector3.SmoothDamp (tCursor.transform.position, new Vector3(hit.point.x, 0, hit.point.z), ref tCursor_velocity, 0.05f*Time.timeScale);
+//				tCursor.transform.position = new Vector3(hit.point.x, 0, hit.point.z);
 				Vector3 dir = new Vector3 (focusManager.GetFocus ().x, 0, focusManager.GetFocus ().z);
 				tCursor.transform.LookAt (dir);
 				particleLine.LookAt (hit.point);
@@ -208,7 +208,7 @@ public class Teleport : MonoBehaviour {
 		
 		if (Physics.Raycast (cam.transform.position, cam.transform.forward, out visualHit, distance)) {
 //			ppDepth.focusDistance = (cam.transform.position - hit.point).magnitude;
-			ppDepth.focusDistance = Mathf.Lerp (ppDepth.focusDistance, (cam.transform.position - hit.point).magnitude, (Time.deltaTime*4));
+			ppDepth.focusDistance = Mathf.Lerp (ppDepth.focusDistance, (cam.transform.position - visualHit.point).magnitude, ((Time.deltaTime/Time.timeScale)*4));
 			pProces.depthOfField.settings = ppDepth;
 			Debug.Log (ppDepth.focusDistance);
 		}

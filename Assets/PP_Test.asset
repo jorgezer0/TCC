@@ -16,7 +16,7 @@ MonoBehaviour:
     m_Settings:
       mode: 0
       depth:
-        scale: 0.035
+        scale: 0.203
       motionVectors:
         sourceOpacity: 1
         motionImageOpacity: 0
@@ -71,11 +71,11 @@ MonoBehaviour:
   depthOfField:
     m_Enabled: 1
     m_Settings:
-      focusDistance: 6
-      aperture: 4.1
+      focusDistance: 4.331139
+      aperture: 3.9
       focalLength: 90
       useCameraFov: 0
-      kernelSize: 0
+      kernelSize: 1
   motionBlur:
     m_Enabled: 0
     m_Settings:
