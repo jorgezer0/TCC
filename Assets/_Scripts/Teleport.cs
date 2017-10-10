@@ -33,6 +33,9 @@ public class Teleport : MonoBehaviour {
 	BloomModel.Settings ppBloom;
 	ChromaticAberrationModel.Settings ppChromatic;
 	VignetteModel.Settings ppVignette;
+	DepthOfFieldModel.Settings ppDepth;
+	RaycastHit visualHit;
+	float tempFocusDist;
 
 	public FocusManager focusManager;
 
@@ -48,11 +51,12 @@ public class Teleport : MonoBehaviour {
 		ppBloom = pProces.bloom.settings;
 		ppChromatic = pProces.chromaticAberration.settings;
 		ppVignette = pProces.vignette.settings;
+		ppDepth = pProces.depthOfField.settings;
 	}
 
 	// Update is called once per frame
 	void Update () {
-
+		AdaptDepthOfField ();
 		deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
 
 		if (!OVRInput.IsControllerConnected (OVRInput.Controller.RTrackedRemote)) {
@@ -147,10 +151,10 @@ public class Teleport : MonoBehaviour {
 			}
 			glitch.enabled = true;
 			glitch.scanLineJitter = step/2;
-			glitch.colorDrift = step;
+			glitch.colorDrift = step/4;
 //			bloom.intensity = step*10;
 //			vignette.intensity = step;
-			ppBloom.bloom.intensity = step/2;
+			ppBloom.bloom.intensity = step;
 			ppChromatic.intensity = step;
 			ppVignette.intensity = step;
 			pProces.bloom.settings = ppBloom;
@@ -194,10 +198,20 @@ public class Teleport : MonoBehaviour {
 	IEnumerator NormalTime(){
 //		yield return new WaitForSeconds (2f);
 		while (Time.timeScale < 1f) {
-			Time.timeScale += 0.1f;
+			Time.timeScale += 0.01f;
 		}
 		Time.timeScale = 1;
 		yield return null;
+	}
+
+	void AdaptDepthOfField(){
+		
+		if (Physics.Raycast (cam.transform.position, cam.transform.forward, out visualHit, distance)) {
+//			ppDepth.focusDistance = (cam.transform.position - hit.point).magnitude;
+			ppDepth.focusDistance = Mathf.Lerp (ppDepth.focusDistance, (cam.transform.position - hit.point).magnitude, (Time.deltaTime*4));
+			pProces.depthOfField.settings = ppDepth;
+			Debug.Log (ppDepth.focusDistance);
+		}
 	}
 }
 
