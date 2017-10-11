@@ -131,7 +131,7 @@ public class TeleportMultiplayer : MonoBehaviour {
 		if (canWarp) {
 			pProces.motionBlur.enabled = true;
 			transform.position = Vector3.SmoothDamp (transform.position, tDestiny, ref vel, warpTime);
-
+//			transform.position = tDestiny;
 			Vector3 normalize = new Vector3 (0, transform.rotation.eulerAngles.y, 0);
 			transform.rotation = Quaternion.Euler (normalize);
 		}
