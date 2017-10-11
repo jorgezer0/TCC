@@ -5,7 +5,7 @@ using UnityEngine.PostProcessing;
 //using UnityEngine.VR;
 using Kino;
 
-public class Teleport : MonoBehaviour {
+public class TeleportMultiplayer : MonoBehaviour {
 
 	public Camera cam;
 	public float rotateSpeed = 2;
@@ -37,11 +37,10 @@ public class Teleport : MonoBehaviour {
 	RaycastHit visualHit;
 	float tempFocusDist;
 
-	private FocusManager focusManager;
 
 	// Use this for initialization
 	void Start () {
-		focusManager = GameObject.Find ("FocusManager").GetComponent<FocusManager>();
+
 //		Time.timeScale = 0.5f;
 
 		glitch = cam.GetComponent<AnalogGlitch> ();
@@ -79,8 +78,8 @@ public class Teleport : MonoBehaviour {
 				}
 				tCursor.transform.position = Vector3.SmoothDamp (tCursor.transform.position, new Vector3(hit.point.x, 0, hit.point.z), ref tCursor_velocity, 0.05f*Time.timeScale);
 //				tCursor.transform.position = new Vector3(hit.point.x, 0, hit.point.z);
-				Vector3 dir = new Vector3 (focusManager.GetFocus ().x, 0, focusManager.GetFocus ().z);
-				tCursor.transform.LookAt (dir);
+
+
 //				line.SetPosition (1, tCursor.transform.position);
 				line.SetPosition (1, hit.point);
 
@@ -112,8 +111,7 @@ public class Teleport : MonoBehaviour {
 				}
 				tCursor.transform.position = Vector3.SmoothDamp (tCursor.transform.position, new Vector3(hit.point.x, 0, hit.point.z), ref tCursor_velocity, 0.05f*Time.timeScale);
 //				tCursor.transform.position = new Vector3(hit.point.x, 0, hit.point.z);
-				Vector3 dir = new Vector3 (focusManager.GetFocus ().x, 0, focusManager.GetFocus ().z);
-				tCursor.transform.LookAt (dir);
+
 				particleLine.LookAt (hit.point);
 				//				line.SetPosition (1, tCursor.transform.position);
 				line.SetPosition (1, hit.point);
@@ -133,7 +131,7 @@ public class Teleport : MonoBehaviour {
 		if (canWarp) {
 			pProces.motionBlur.enabled = true;
 			transform.position = Vector3.SmoothDamp (transform.position, tDestiny, ref vel, warpTime);
-			transform.LookAt (focusManager.GetFocus ());
+
 			Vector3 normalize = new Vector3 (0, transform.rotation.eulerAngles.y, 0);
 			transform.rotation = Quaternion.Euler (normalize);
 		}

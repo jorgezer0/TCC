@@ -14,6 +14,7 @@ public class DoorBehaviour : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		player = GameObject.Find ("Player");
 		anim = GetComponent<Animator> ();
 	}
 	
