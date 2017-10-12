@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PostProcessing;
-//using UnityEngine.VR;
+using UnityEngine.Networking;
 using Kino;
 
-public class TeleportMultiplayer : MonoBehaviour {
+public class MultiplayerPlayerController : NetworkBehaviour {
 
 	public Camera cam;
 	public float rotateSpeed = 2;
@@ -132,6 +132,7 @@ public class TeleportMultiplayer : MonoBehaviour {
 			pProces.motionBlur.enabled = true;
 			transform.position = Vector3.SmoothDamp (transform.position, tDestiny, ref vel, warpTime);
 //			transform.position = tDestiny;
+			CmdTeleportRemote(transform.name, tDestiny);
 			Vector3 normalize = new Vector3 (0, transform.rotation.eulerAngles.y, 0);
 			transform.rotation = Quaternion.Euler (normalize);
 		}
@@ -210,6 +211,13 @@ public class TeleportMultiplayer : MonoBehaviour {
 			pProces.depthOfField.settings = ppDepth;
 //			Debug.Log (ppDepth.focusDistance);
 		}
+	}
+
+	[Command]
+	void CmdTeleportRemote(string _playerID, Vector3 tDest){
+		Player _player = GameManager.GetPlayer (_playerID);
+
+		_player.TeleportTo (tDest);
 	}
 }
 
