@@ -6,7 +6,8 @@ using UnityEngine.Networking;
 public class Player : NetworkBehaviour {
 
 	public bool canTeleport = false;
-	private static Vector3 tDestiny;
+	[SerializeField]
+	public static Vector3 tDestiny;
 
 	// Use this for initialization
 	void Start () {

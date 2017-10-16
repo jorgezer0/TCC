@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour {
 		string _playerID = PLAYER_ID_PREFIX + _netID;
 		players.Add (_playerID, _player);
 		_player.transform.name = _playerID;
+		Debug.Log (_playerID + " _ " + players[_playerID].transform.name);
 	}
 
 	public static void UnRegisterPlayer(string _playerID){
