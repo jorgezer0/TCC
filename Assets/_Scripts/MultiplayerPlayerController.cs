@@ -132,7 +132,7 @@ public class MultiplayerPlayerController : NetworkBehaviour {
 			pProces.motionBlur.enabled = true;
 			transform.position = Vector3.SmoothDamp (transform.position, tDestiny, ref vel, warpTime);
 //			transform.position = tDestiny;
-			TeleportRemote();
+			CmdTeleportRemote();
 			Vector3 normalize = new Vector3 (0, transform.rotation.eulerAngles.y, 0);
 			transform.rotation = Quaternion.Euler (normalize);
 		}
@@ -213,16 +213,16 @@ public class MultiplayerPlayerController : NetworkBehaviour {
 		}
 	}
 
-	[Client]
-	void TeleportRemote(){
-		CmdTeleportRemote(transform.name, tDestiny);
+	[Command]
+	void CmdTeleportRemote(){
+		RpcTeleportRemote(transform.name, tDestiny);
 	}
 
-	[Command]
-	void CmdTeleportRemote(string _playerID, Vector3 tDest){
+	[ClientRpc]
+	void RpcTeleportRemote(string _playerID, Vector3 tDest){
 		Player _player = GameManager.GetPlayer (_playerID);
 
-		_player.TeleportTo (tDest);
+		_player.RpcTeleportTo (tDest);
 	}
 }
 

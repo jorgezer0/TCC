@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class Player : NetworkBehaviour {
+public class Player : MonoBehaviour {
 
-	public bool canTeleport = false;
-	[SerializeField]
-	public static Vector3 tDestiny;
+	bool canTeleport = false;
+	Vector3 tDestiny;
 
 	// Use this for initialization
 	void Start () {
@@ -20,11 +19,12 @@ public class Player : NetworkBehaviour {
 			transform.position = Vector3.Lerp (transform.position, tDestiny, Time.deltaTime * 5);
 			if (transform.position == tDestiny) {
 				canTeleport = false;
+				Debug.Log (transform.name + " moving.");
 			}
 		}
 	}
-
-	public void TeleportTo(Vector3 tDest){
+		
+	public void RpcTeleportTo(Vector3 tDest){
 		tDestiny = tDest;
 		canTeleport = true;
 	}
