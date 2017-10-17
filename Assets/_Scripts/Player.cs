@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class Player : MonoBehaviour {
+public class Player : NetworkBehaviour {
 
 	bool canTeleport = false;
 	Vector3 tDestiny;
@@ -27,5 +27,9 @@ public class Player : MonoBehaviour {
 	public void RpcTeleportTo(Vector3 tDest){
 		tDestiny = tDest;
 		canTeleport = true;
+	}
+
+	public void SetTimeScale(float t){
+		Time.timeScale = t;
 	}
 }

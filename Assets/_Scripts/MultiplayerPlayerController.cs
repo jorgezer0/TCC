@@ -131,8 +131,9 @@ public class MultiplayerPlayerController : NetworkBehaviour {
 		if (canWarp) {
 			pProces.motionBlur.enabled = true;
 			transform.position = Vector3.SmoothDamp (transform.position, tDestiny, ref vel, warpTime);
+
 //			transform.position = tDestiny;
-			CmdTeleportRemote();
+			CmdTeleportRemote(tDestiny);
 			Vector3 normalize = new Vector3 (0, transform.rotation.eulerAngles.y, 0);
 			transform.rotation = Quaternion.Euler (normalize);
 		}
@@ -214,8 +215,8 @@ public class MultiplayerPlayerController : NetworkBehaviour {
 	}
 
 	[Command]
-	void CmdTeleportRemote(){
-		RpcTeleportRemote(transform.name, tDestiny);
+	void CmdTeleportRemote(Vector3 dest){
+		RpcTeleportRemote(transform.name, dest);
 	}
 
 	[ClientRpc]
