@@ -37,10 +37,16 @@ public class MultiplayerPlayerController : NetworkBehaviour {
 	RaycastHit visualHit;
 	float tempFocusDist;
 
+	public float force = 1000;
+	public GameObject bullet;
+
+	public Player _player;
+	public NetworkManager _netMan;
 
 	// Use this for initialization
 	void Start () {
-
+		_player = GetComponent <Player> ();
+		_netMan = GameObject.Find ("_NetworkManager").GetComponent <NetworkManager> ();
 //		Time.timeScale = 0.5f;
 
 		glitch = cam.GetComponent<AnalogGlitch> ();
@@ -68,6 +74,13 @@ public class MultiplayerPlayerController : NetworkBehaviour {
 			cursorCanvas.SetActive (false);
 			controller.transform.localRotation = OVRInput.GetLocalControllerRotation(OVRInput.Controller.RTrackedRemote);
 			Debug.DrawRay (rayOrigin.transform.position, rayOrigin.forward);
+
+			if (isLocalPlayer) {
+				if (OVRInput.GetDown (OVRInput.Button.PrimaryIndexTrigger)) {
+					CmdShoot (rayOrigin.transform.position + rayOrigin.transform.forward, rayOrigin.transform.forward);
+				}
+			}
+
 			if (Physics.Raycast (rayOrigin.position, rayOrigin.forward, out hit, distance)) {
 //				line.SetPosition (1, hit.point);
 
@@ -98,9 +111,13 @@ public class MultiplayerPlayerController : NetworkBehaviour {
 		} else {
 //			Debug.Log ("Controller Disconected!");
 			cursorCanvas.SetActive (true);
-//			if (controller.activeSelf) {
-//				controller.SetActive (false);
-//			}
+
+			if (isLocalPlayer) {
+				if (Input.GetMouseButtonDown (0)) {
+					CmdShoot (rayOrigin.transform.position + rayOrigin.transform.forward, rayOrigin.transform.forward);
+				}
+			}
+
 			if (Physics.Raycast (cam.transform.position, cam.transform.forward, out hit, distance)) {
 //			Debug.DrawLine (cam.transform.position, hit.point, Color.red, 2f);
 
@@ -115,12 +132,12 @@ public class MultiplayerPlayerController : NetworkBehaviour {
 				particleLine.LookAt (hit.point);
 				//				line.SetPosition (1, tCursor.transform.position);
 				line.SetPosition (1, hit.point);
-				if (Input.GetMouseButtonDown (0)) {
+				if (Input.GetMouseButtonDown (1)) {
 					Debug.Log ("Slow...");
 					StartCoroutine ("SlowTime");
 				}
 
-				if (Input.GetMouseButtonUp (0)) {
+				if (Input.GetMouseButtonUp (1)) {
 					Debug.Log ("normal...");
 					tDestiny = tCursor.transform.position;
 					StartCoroutine ("TeleportTo");
@@ -136,6 +153,12 @@ public class MultiplayerPlayerController : NetworkBehaviour {
 			CmdTeleportRemote(tDestiny);
 			Vector3 normalize = new Vector3 (0, transform.rotation.eulerAngles.y, 0);
 			transform.rotation = Quaternion.Euler (normalize);
+		}
+
+		if (_player.health == 0){
+			Transform randomSpawn = _netMan.startPositions [Random.Range (0, _netMan.startPositions.Count)].transform;
+			CmdTeleportRemote (randomSpawn.position);
+			transform.rotation = randomSpawn.rotation;
 		}
 	}
 
@@ -225,5 +248,20 @@ public class MultiplayerPlayerController : NetworkBehaviour {
 
 		_player.RpcTeleportTo (tDest);
 	}
+
+	[Command]
+	public void CmdShoot(Vector3 position, Vector3 dir){
+		RpcInstantiateBullet (position, dir);
+	}
+
+	[ClientRpc]
+	public void RpcInstantiateBullet(Vector3 position, Vector3 dir){
+
+		GameObject obj = (GameObject)Instantiate (bullet, 
+			position,Quaternion.identity);
+		obj.GetComponent<Rigidbody> ().AddForce (dir * force);
+	}
+
+
 }
 
