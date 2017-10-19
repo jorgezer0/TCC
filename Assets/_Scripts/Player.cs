@@ -18,10 +18,21 @@ public class Player : NetworkBehaviour {
 	Color emptyBar = Color.red;
 	Color fullBar = Color.green;
 
+	public int score = 0;
+	int playersCount = 0;
+	public Text versusScore;
+
+	ParticleSystem _particles;
+
 
 	// Use this for initialization
 	void Start () {
 		life.text = health.ToString ();
+		_particles = GetComponent <ParticleSystem> ();
+		versusScore.text = "";
+		foreach(KeyValuePair<string, Player> _players in GameManager.players){
+			versusScore.text += (_players.Key + " - " + _players.Value.score + "\n");
+		}
 	}
 	
 	// Update is called once per frame
@@ -45,11 +56,20 @@ public class Player : NetworkBehaviour {
 		Debug.Log (amount);
 		lifeBar.color = Color.Lerp (emptyBar, fullBar, amount);
 		lifeBar.fillAmount = amount;
+
+
+		versusScore.text = "";
+		foreach(KeyValuePair<string, Player> _players in GameManager.players){
+			versusScore.text += (_players.Key + " - " + _players.Value.score + "\n");
+		}
+
+
 	}
 		
 	public void RpcTeleportTo(Vector3 tDest){
 		tDestiny = tDest;
 		canTeleport = true;
+		_particles.Emit (5);
 	}
 
 	public void SetTimeScale(float t){
@@ -57,8 +77,16 @@ public class Player : NetworkBehaviour {
 	}
 
 	[ClientRpc]
-	public void RpcDamagePlayer(){
+	public void RpcDamagePlayer(string shooter){
 		health--;
 		life.text = health.ToString ();
+		Player _shooter = GameManager.GetPlayer (shooter);
+		if (health == 0){
+			_shooter.score++;
+		}
+		versusScore.text = "";
+		foreach(KeyValuePair<string, Player> _players in GameManager.players){
+			versusScore.text += (_players.Key + " - " + _players.Value.score + "\n");
+		}
 	}
 }

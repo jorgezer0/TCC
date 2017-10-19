@@ -22,6 +22,7 @@ public class MultiplayerPlayerController : NetworkBehaviour {
 	private Vector3 tDestiny = Vector3.zero;
 	float deltaTime;
 	public float distance;
+	public float wallOffset;
 	Vector3 vel = Vector3.zero;
 	bool canWarp = false;
 	public float warpTime;
@@ -37,6 +38,8 @@ public class MultiplayerPlayerController : NetworkBehaviour {
 	RaycastHit visualHit;
 	float tempFocusDist;
 
+	ParticleSystem _particles;
+
 	public float force = 1000;
 	public GameObject bullet;
 
@@ -46,6 +49,7 @@ public class MultiplayerPlayerController : NetworkBehaviour {
 	// Use this for initialization
 	void Start () {
 		_player = GetComponent <Player> ();
+		_particles = GetComponent <ParticleSystem> ();
 		_netMan = GameObject.Find ("_NetworkManager").GetComponent <NetworkManager> ();
 //		Time.timeScale = 0.5f;
 
@@ -89,7 +93,12 @@ public class MultiplayerPlayerController : NetworkBehaviour {
 				if (!tCursor.activeSelf) {
 					tCursor.SetActive (true);
 				}
-				tCursor.transform.position = Vector3.SmoothDamp (tCursor.transform.position, new Vector3(hit.point.x, 0, hit.point.z), ref tCursor_velocity, 0.05f*Time.timeScale);
+				if (hit.collider.tag == "Wall") {
+					Vector3 wallHit = hit.point - ((hit.point - rayOrigin.transform.position).normalized * wallOffset);
+					tCursor.transform.position = Vector3.SmoothDamp (tCursor.transform.position, new Vector3(wallHit.x, 0, wallHit.z), ref tCursor_velocity, 0.1f * Time.timeScale);
+				} else {
+					tCursor.transform.position = Vector3.SmoothDamp (tCursor.transform.position, new Vector3 (hit.point.x, 0, hit.point.z), ref tCursor_velocity, 0.1f * Time.timeScale);
+				}
 //				tCursor.transform.position = new Vector3(hit.point.x, 0, hit.point.z);
 
 
@@ -126,7 +135,12 @@ public class MultiplayerPlayerController : NetworkBehaviour {
 				if (!tCursor.activeSelf) {
 					tCursor.SetActive (true);
 				}
-				tCursor.transform.position = Vector3.SmoothDamp (tCursor.transform.position, new Vector3(hit.point.x, 0, hit.point.z), ref tCursor_velocity, 0.05f*Time.timeScale);
+				if (hit.collider.tag == "Wall") {
+					Vector3 wallHit = hit.point - ((hit.point - cam.transform.position).normalized * wallOffset);
+					tCursor.transform.position = Vector3.SmoothDamp (tCursor.transform.position, new Vector3(wallHit.x, 0, wallHit.z), ref tCursor_velocity, 0.1f * Time.timeScale);
+				} else {
+					tCursor.transform.position = Vector3.SmoothDamp (tCursor.transform.position, new Vector3 (hit.point.x, 0, hit.point.z), ref tCursor_velocity, 0.1f * Time.timeScale);
+				}
 //				tCursor.transform.position = new Vector3(hit.point.x, 0, hit.point.z);
 
 				particleLine.LookAt (hit.point);
@@ -189,6 +203,7 @@ public class MultiplayerPlayerController : NetworkBehaviour {
 			}
 			if (step >= 0.5f) {
 				canWarp = true;
+//				_particles.Emit (5);
 			}
 
 //			yield return new WaitForSeconds (1/((deltaTime/Time.timeScale) * 1000f));
@@ -259,6 +274,7 @@ public class MultiplayerPlayerController : NetworkBehaviour {
 
 		GameObject obj = (GameObject)Instantiate (bullet, 
 			position,Quaternion.identity);
+		obj.GetComponent <Bullet>().shooter = GetComponent <Player>();
 		obj.GetComponent<Rigidbody> ().AddForce (dir * force);
 	}
 
