@@ -296,9 +296,9 @@ GameObject:
   - component: {fileID: 12288555}
   - component: {fileID: 12288554}
   - component: {fileID: 12288553}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (60)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -327,7 +327,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -424,7 +424,7 @@ MonoBehaviour:
   m_ScriptCRCCheck: 1
   m_MaxDelay: 0.01
   m_LogLevel: 2
-  m_PlayerPrefab: {fileID: 1091149812635698, guid: 0b53d80f6d6729f40afe6b124b8b59d0,
+  m_PlayerPrefab: {fileID: 1789470242030000, guid: 0b53d80f6d6729f40afe6b124b8b59d0,
     type: 2}
   m_AutoCreatePlayer: 1
   m_PlayerSpawnMethod: 1
@@ -510,9 +510,9 @@ GameObject:
   - component: {fileID: 27259958}
   - component: {fileID: 27259957}
   - component: {fileID: 27259956}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall.002 (21)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -541,7 +541,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300036, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -1293,9 +1293,9 @@ GameObject:
   - component: {fileID: 64454579}
   - component: {fileID: 64454578}
   - component: {fileID: 64454577}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall.002 (30)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -1324,7 +1324,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300036, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -1554,9 +1554,9 @@ GameObject:
   - component: {fileID: 83378846}
   - component: {fileID: 83378845}
   - component: {fileID: 83378844}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (71)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -1585,7 +1585,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -2360,9 +2360,9 @@ GameObject:
   - component: {fileID: 110954635}
   - component: {fileID: 110954634}
   - component: {fileID: 110954633}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (53)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -2391,7 +2391,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -2815,7 +2815,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   netManager: {fileID: 13961158}
-  address: 192.168.0.173
+  address: 192.168.31.14
 --- !u!23 &127772970
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3413,9 +3413,9 @@ GameObject:
   - component: {fileID: 181355262}
   - component: {fileID: 181355261}
   - component: {fileID: 181355260}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Corner (13)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -3444,7 +3444,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300018, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -4196,9 +4196,9 @@ GameObject:
   - component: {fileID: 213158354}
   - component: {fileID: 213158353}
   - component: {fileID: 213158352}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (73)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -4227,7 +4227,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -5066,9 +5066,9 @@ GameObject:
   - component: {fileID: 267607266}
   - component: {fileID: 267607265}
   - component: {fileID: 267607264}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall.002 (36)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -5097,7 +5097,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300036, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -5972,9 +5972,9 @@ GameObject:
   - component: {fileID: 313881483}
   - component: {fileID: 313881482}
   - component: {fileID: 313881481}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (62)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -6003,7 +6003,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -6059,9 +6059,9 @@ GameObject:
   - component: {fileID: 317652757}
   - component: {fileID: 317652756}
   - component: {fileID: 317652755}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (55)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -6090,7 +6090,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -6320,9 +6320,9 @@ GameObject:
   - component: {fileID: 326365999}
   - component: {fileID: 326365998}
   - component: {fileID: 326365997}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (47)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -6351,7 +6351,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -6407,9 +6407,9 @@ GameObject:
   - component: {fileID: 329067569}
   - component: {fileID: 329067568}
   - component: {fileID: 329067567}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (68)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -6438,7 +6438,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -6494,9 +6494,9 @@ GameObject:
   - component: {fileID: 330506393}
   - component: {fileID: 330506392}
   - component: {fileID: 330506391}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall.002 (28)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -6525,7 +6525,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300036, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -7168,9 +7168,9 @@ GameObject:
   - component: {fileID: 357112524}
   - component: {fileID: 357112523}
   - component: {fileID: 357112522}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (72)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -7199,7 +7199,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -7342,9 +7342,9 @@ GameObject:
   - component: {fileID: 382566956}
   - component: {fileID: 382566955}
   - component: {fileID: 382566954}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall.002 (27)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -7373,7 +7373,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300036, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -7603,9 +7603,9 @@ GameObject:
   - component: {fileID: 384963166}
   - component: {fileID: 384963165}
   - component: {fileID: 384963164}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (49)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -7634,7 +7634,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -7690,9 +7690,9 @@ GameObject:
   - component: {fileID: 392425194}
   - component: {fileID: 392425193}
   - component: {fileID: 392425192}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall.002 (38)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -7721,7 +7721,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300036, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -8511,9 +8511,9 @@ GameObject:
   - component: {fileID: 445816409}
   - component: {fileID: 445816408}
   - component: {fileID: 445816407}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Corner (10)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -8542,7 +8542,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300018, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -10329,9 +10329,9 @@ GameObject:
   - component: {fileID: 545848789}
   - component: {fileID: 545848788}
   - component: {fileID: 545848787}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (33)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -10360,7 +10360,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -10416,9 +10416,9 @@ GameObject:
   - component: {fileID: 546422788}
   - component: {fileID: 546422787}
   - component: {fileID: 546422786}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (56)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -10447,7 +10447,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -11132,7 +11132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   netManager: {fileID: 13961158}
-  address: 192.168.0.173
+  address: 192.168.31.14
 --- !u!23 &573048823
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12092,9 +12092,9 @@ GameObject:
   - component: {fileID: 619269506}
   - component: {fileID: 619269505}
   - component: {fileID: 619269504}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (41)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -12123,7 +12123,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -13288,9 +13288,9 @@ GameObject:
   - component: {fileID: 681728408}
   - component: {fileID: 681728407}
   - component: {fileID: 681728406}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (52)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -13319,7 +13319,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -13462,9 +13462,9 @@ GameObject:
   - component: {fileID: 693864629}
   - component: {fileID: 693864628}
   - component: {fileID: 693864627}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall.002 (22)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -13493,7 +13493,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300036, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -13549,9 +13549,9 @@ GameObject:
   - component: {fileID: 706399601}
   - component: {fileID: 706399600}
   - component: {fileID: 706399599}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall.002 (32)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -13580,7 +13580,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300036, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -14272,9 +14272,9 @@ GameObject:
   - component: {fileID: 740722669}
   - component: {fileID: 740722668}
   - component: {fileID: 740722667}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (48)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -14303,7 +14303,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -15278,9 +15278,9 @@ GameObject:
   - component: {fileID: 782131186}
   - component: {fileID: 782131185}
   - component: {fileID: 782131184}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Corner (17)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -15309,7 +15309,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300018, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -15452,9 +15452,9 @@ GameObject:
   - component: {fileID: 786410845}
   - component: {fileID: 786410844}
   - component: {fileID: 786410843}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall.002 (26)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -15483,7 +15483,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300036, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -16300,9 +16300,9 @@ GameObject:
   - component: {fileID: 825529241}
   - component: {fileID: 825529240}
   - component: {fileID: 825529239}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall.002 (35)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -16331,7 +16331,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300036, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -16996,9 +16996,9 @@ GameObject:
   - component: {fileID: 842125240}
   - component: {fileID: 842125239}
   - component: {fileID: 842125238}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall.002 (34)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -17027,7 +17027,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300036, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -18562,9 +18562,9 @@ GameObject:
   - component: {fileID: 909435541}
   - component: {fileID: 909435540}
   - component: {fileID: 909435539}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall.002 (25)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -18593,7 +18593,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300036, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -18736,9 +18736,9 @@ GameObject:
   - component: {fileID: 921454936}
   - component: {fileID: 921454935}
   - component: {fileID: 921454934}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (25)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -18767,7 +18767,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -19780,9 +19780,9 @@ GameObject:
   - component: {fileID: 975323385}
   - component: {fileID: 975323384}
   - component: {fileID: 975323383}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Corner (14)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -19811,7 +19811,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300018, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -19867,9 +19867,9 @@ GameObject:
   - component: {fileID: 975961760}
   - component: {fileID: 975961759}
   - component: {fileID: 975961758}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (74)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -19898,7 +19898,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -20001,9 +20001,9 @@ GameObject:
   - component: {fileID: 979413482}
   - component: {fileID: 979413481}
   - component: {fileID: 979413480}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (61)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -20032,7 +20032,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -20175,9 +20175,9 @@ GameObject:
   - component: {fileID: 988544179}
   - component: {fileID: 988544178}
   - component: {fileID: 988544177}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall.002 (39)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -20206,7 +20206,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300036, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -20523,9 +20523,9 @@ GameObject:
   - component: {fileID: 1011690419}
   - component: {fileID: 1011690418}
   - component: {fileID: 1011690417}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (42)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -20554,7 +20554,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -20784,9 +20784,9 @@ GameObject:
   - component: {fileID: 1013998417}
   - component: {fileID: 1013998416}
   - component: {fileID: 1013998415}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (51)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -20815,7 +20815,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -20871,9 +20871,9 @@ GameObject:
   - component: {fileID: 1015667534}
   - component: {fileID: 1015667533}
   - component: {fileID: 1015667532}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall.002 (24)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -20902,7 +20902,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300036, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -21314,9 +21314,9 @@ GameObject:
   - component: {fileID: 1058694144}
   - component: {fileID: 1058694143}
   - component: {fileID: 1058694142}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall.002 (33)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -21345,7 +21345,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300036, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -21401,9 +21401,9 @@ GameObject:
   - component: {fileID: 1067928452}
   - component: {fileID: 1067928451}
   - component: {fileID: 1067928450}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall.002 (31)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -21432,7 +21432,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300036, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -21488,9 +21488,9 @@ GameObject:
   - component: {fileID: 1072574747}
   - component: {fileID: 1072574746}
   - component: {fileID: 1072574745}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall.002 (37)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -21519,7 +21519,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300036, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -22433,9 +22433,9 @@ GameObject:
   - component: {fileID: 1117840880}
   - component: {fileID: 1117840879}
   - component: {fileID: 1117840878}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (45)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -22464,7 +22464,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -22778,9 +22778,9 @@ GameObject:
   - component: {fileID: 1145458688}
   - component: {fileID: 1145458687}
   - component: {fileID: 1145458686}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (46)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -22809,7 +22809,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -22952,9 +22952,9 @@ GameObject:
   - component: {fileID: 1177535029}
   - component: {fileID: 1177535028}
   - component: {fileID: 1177535027}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall.002 (23)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -22983,7 +22983,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300036, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -23772,7 +23772,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1246480655}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25474,9 +25474,9 @@ GameObject:
   - component: {fileID: 1323294824}
   - component: {fileID: 1323294823}
   - component: {fileID: 1323294822}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (69)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -25505,7 +25505,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -25561,9 +25561,9 @@ GameObject:
   - component: {fileID: 1323358264}
   - component: {fileID: 1323358263}
   - component: {fileID: 1323358262}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Corner (11)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -25592,7 +25592,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300018, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -26232,9 +26232,9 @@ GameObject:
   - component: {fileID: 1345945715}
   - component: {fileID: 1345945714}
   - component: {fileID: 1345945713}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (57)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -26263,7 +26263,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -27363,9 +27363,9 @@ GameObject:
   - component: {fileID: 1438072922}
   - component: {fileID: 1438072921}
   - component: {fileID: 1438072920}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (67)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -27394,7 +27394,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -28407,9 +28407,9 @@ GameObject:
   - component: {fileID: 1500869186}
   - component: {fileID: 1500869185}
   - component: {fileID: 1500869184}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (44)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -28438,7 +28438,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -28668,9 +28668,9 @@ GameObject:
   - component: {fileID: 1512123298}
   - component: {fileID: 1512123297}
   - component: {fileID: 1512123296}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Corner (12)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -28699,7 +28699,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300018, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -29174,9 +29174,9 @@ GameObject:
   - component: {fileID: 1531716454}
   - component: {fileID: 1531716453}
   - component: {fileID: 1531716452}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (43)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -29205,7 +29205,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -30044,9 +30044,9 @@ GameObject:
   - component: {fileID: 1585123198}
   - component: {fileID: 1585123197}
   - component: {fileID: 1585123196}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (65)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -30075,7 +30075,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -30305,9 +30305,9 @@ GameObject:
   - component: {fileID: 1595443864}
   - component: {fileID: 1595443863}
   - component: {fileID: 1595443862}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Corner (15)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -30336,7 +30336,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300018, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -31324,9 +31324,9 @@ GameObject:
   - component: {fileID: 1653415544}
   - component: {fileID: 1653415543}
   - component: {fileID: 1653415542}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (63)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -31355,7 +31355,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -32190,9 +32190,9 @@ GameObject:
   - component: {fileID: 1707275181}
   - component: {fileID: 1707275180}
   - component: {fileID: 1707275179}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (31)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -32221,7 +32221,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -32364,9 +32364,9 @@ GameObject:
   - component: {fileID: 1712760604}
   - component: {fileID: 1712760603}
   - component: {fileID: 1712760602}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall.002 (40)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -32395,7 +32395,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300036, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -33364,9 +33364,9 @@ GameObject:
   - component: {fileID: 1767841490}
   - component: {fileID: 1767841489}
   - component: {fileID: 1767841488}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (54)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -33395,7 +33395,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -34821,9 +34821,9 @@ GameObject:
   - component: {fileID: 1862467490}
   - component: {fileID: 1862467489}
   - component: {fileID: 1862467488}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (66)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -34852,7 +34852,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -34995,9 +34995,9 @@ GameObject:
   - component: {fileID: 1874782638}
   - component: {fileID: 1874782637}
   - component: {fileID: 1874782636}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall.002 (29)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -35026,7 +35026,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300036, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -36278,9 +36278,9 @@ GameObject:
   - component: {fileID: 1993972424}
   - component: {fileID: 1993972423}
   - component: {fileID: 1993972422}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (70)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -36309,7 +36309,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -36430,9 +36430,9 @@ GameObject:
   - component: {fileID: 2002091671}
   - component: {fileID: 2002091670}
   - component: {fileID: 2002091669}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Corner (16)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -36461,7 +36461,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300018, guid: 54be09f217078764f863b745189a05d7, type: 3}
@@ -37300,9 +37300,9 @@ GameObject:
   - component: {fileID: 2026235129}
   - component: {fileID: 2026235128}
   - component: {fileID: 2026235127}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (50)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -37331,7 +37331,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 54be09f217078764f863b745189a05d7, type: 3}

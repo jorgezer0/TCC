@@ -10,14 +10,18 @@ public class Player : NetworkBehaviour {
 	Vector3 tDestiny;
 
 	[SyncVar]
-	public int health = 10;
+	public float health = 10;
 	public TextMesh life;
-	public Text lifeHUD;
+	public TextMesh lifeHUD;
+
+	public Image lifeBar;
+	Color emptyBar = Color.red;
+	Color fullBar = Color.green;
+
 
 	// Use this for initialization
 	void Start () {
 		life.text = health.ToString ();
-		lifeHUD.text = health.ToString ();
 	}
 	
 	// Update is called once per frame
@@ -35,8 +39,12 @@ public class Player : NetworkBehaviour {
 		if (health == 0){
 			health = 10;
 			life.text = health.ToString ();
-			lifeHUD.text = health.ToString ();
 		}
+
+		float amount = health / 10;
+		Debug.Log (amount);
+		lifeBar.color = Color.Lerp (emptyBar, fullBar, amount);
+		lifeBar.fillAmount = amount;
 	}
 		
 	public void RpcTeleportTo(Vector3 tDest){
@@ -52,6 +60,5 @@ public class Player : NetworkBehaviour {
 	public void RpcDamagePlayer(){
 		health--;
 		life.text = health.ToString ();
-		lifeHUD.text = health.ToString ();
 	}
 }
