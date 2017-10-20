@@ -41,7 +41,6 @@ public class Player : NetworkBehaviour {
 			transform.position = Vector3.Lerp (transform.position, tDestiny, Time.deltaTime * 5);
 			if (transform.position == tDestiny) {
 				canTeleport = false;
-				Debug.Log (transform.name + " moving.");
 			}
 		}
 
@@ -53,7 +52,6 @@ public class Player : NetworkBehaviour {
 		}
 
 		float amount = health / 10;
-		Debug.Log (amount);
 		lifeBar.color = Color.Lerp (emptyBar, fullBar, amount);
 		lifeBar.fillAmount = amount;
 

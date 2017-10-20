@@ -131,7 +131,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1652242226205430
 GameObject:
   m_ObjectHideFlags: 1
@@ -232,6 +232,8 @@ GameObject:
   - component: {fileID: 81815341203890236}
   - component: {fileID: 114727291240233468}
   - component: {fileID: 114420907771964724}
+  - component: {fileID: 114893358633355724}
+  - component: {fileID: 114647257223601244}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -273,7 +275,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1913355445586414
 GameObject:
   m_ObjectHideFlags: 0
@@ -402,7 +404,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1789470242030000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.22, y: 0, z: -14.82}
+  m_LocalPosition: {x: -0.163, y: 0, z: -15.082}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4633137847386390}
@@ -519,12 +521,12 @@ Camera:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_RenderingPath: -1
+  m_RenderingPath: 3
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
-  m_AllowMSAA: 1
+  m_AllowMSAA: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -1097,6 +1099,18 @@ MonoBehaviour:
     i15: 208
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
+--- !u!114 &114647257223601244
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1831332236237252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70bebb2fd076d294fa7caa9c5fd7190b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 114510740477648740}
 --- !u!114 &114727291240233468
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1133,6 +1147,28 @@ MonoBehaviour:
   - {fileID: 1108083169229162}
   - {fileID: 1538075399998496}
   body: {fileID: 23807564668366100}
+--- !u!114 &114893358633355724
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1831332236237252}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ad5467732270489caa1d54fe84f1618, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  horizontalResolution: 400
+  verticalResolution: 400
+  numColors: 6
+  color0: {r: 0, g: 0, b: 0, a: 1}
+  color1: {r: 1, g: 1, b: 1, a: 1}
+  color2: {r: 0.375, g: 0.375, b: 0.375, a: 1}
+  color3: {r: 0.24264705, g: 0.20722821, b: 0.032115053, a: 1}
+  color4: {r: 0.32352942, g: 0.3230618, b: 0.21410036, a: 1}
+  color5: {r: 0.05706522, g: 0.125, b: 0, a: 1}
+  color6: {r: 0, g: 0.64705884, b: 0.7921569, a: 1}
+  color7: {r: 0.7529412, g: 0.41568628, b: 0.7607843, a: 1}
 --- !u!114 &114939186901602834
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1156,7 +1192,7 @@ LineRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1769623094188852}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 0
@@ -1208,7 +1244,7 @@ LineRenderer:
       m_RotationOrder: 0
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 0.094875276, g: 0.45588237, b: 0.026816608, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -1334,7 +1370,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -780472662
+  randomSeed: -1175289511
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -4602,7 +4638,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1342085973
+  randomSeed: -1306509539
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -5004,7 +5040,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 0.05
       minScalar: 0
       maxCurve:
         serializedVersion: 2

@@ -8,8 +8,8 @@ QualitySettings:
   m_QualitySettings:
   - serializedVersion: 2
     name: High
-    pixelLightCount: 2
-    shadows: 2
+    pixelLightCount: 1
+    shadows: 0
     shadowResolution: 1
     shadowProjection: 1
     shadowCascades: 2
@@ -18,13 +18,13 @@ QualitySettings:
     shadowCascade2Split: 0.33333334
     shadowCascade4Split: {x: 0.06666667, y: 0.2, z: 0.46666667}
     shadowmaskMode: 1
-    blendWeights: 2
-    textureQuality: 0
+    blendWeights: 1
+    textureQuality: 1
     anisotropicTextures: 1
     antiAliasing: 0
     softParticles: 0
     softVegetation: 1
-    realtimeReflectionProbes: 1
+    realtimeReflectionProbes: 0
     billboardsFaceCameraPosition: 1
     vSyncCount: 0
     lodBias: 1
@@ -34,4 +34,6 @@ QualitySettings:
     asyncUploadBufferSize: 4
     resolutionScalingFixedDPIFactor: 1
     excludedTargetPlatforms: []
-  m_PerPlatformDefaultQuality: {}
+  m_PerPlatformDefaultQuality:
+    Android: 0
+    Standalone: 0

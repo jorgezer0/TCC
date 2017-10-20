@@ -81,7 +81,7 @@ public class MultiplayerPlayerController : NetworkBehaviour {
 
 			if (isLocalPlayer) {
 				if (OVRInput.GetDown (OVRInput.Button.PrimaryIndexTrigger)) {
-					CmdShoot (rayOrigin.transform.position + rayOrigin.transform.forward, rayOrigin.transform.forward);
+					CmdShoot (rayOrigin.transform.position, rayOrigin.transform.forward);
 				}
 			}
 
@@ -123,7 +123,7 @@ public class MultiplayerPlayerController : NetworkBehaviour {
 
 			if (isLocalPlayer) {
 				if (Input.GetMouseButtonDown (0)) {
-					CmdShoot (rayOrigin.transform.position + rayOrigin.transform.forward, rayOrigin.transform.forward);
+					CmdShoot (rayOrigin.transform.position, rayOrigin.transform.forward);
 				}
 			}
 
@@ -147,12 +147,10 @@ public class MultiplayerPlayerController : NetworkBehaviour {
 				//				line.SetPosition (1, tCursor.transform.position);
 				line.SetPosition (1, hit.point);
 				if (Input.GetMouseButtonDown (1)) {
-					Debug.Log ("Slow...");
 					StartCoroutine ("SlowTime");
 				}
 
 				if (Input.GetMouseButtonUp (1)) {
-					Debug.Log ("normal...");
 					tDestiny = tCursor.transform.position;
 					StartCoroutine ("TeleportTo");
 					StartCoroutine ("NormalTime");
