@@ -227,6 +227,7 @@ public class MultiplayerPlayerController : NetworkBehaviour {
 	IEnumerator SlowTime(){
 		while (Time.timeScale > 0.05f) {
 			Time.timeScale -= 0.05f;
+			Time.fixedDeltaTime = Time.timeScale * 0.02f;
 		}
 		yield return null;
 	}
@@ -235,8 +236,10 @@ public class MultiplayerPlayerController : NetworkBehaviour {
 //		yield return new WaitForSeconds (2f);
 		while (Time.timeScale < 1f) {
 			Time.timeScale += 0.01f;
+			Time.fixedDeltaTime = Time.timeScale * 0.02f;
 		}
 		Time.timeScale = 1;
+		Time.fixedDeltaTime = Time.timeScale * 0.02f;
 		yield return null;
 	}
 
