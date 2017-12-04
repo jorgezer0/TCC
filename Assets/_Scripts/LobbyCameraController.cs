@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LobbyCameraController : MonoBehaviour {
 
@@ -18,6 +19,21 @@ public class LobbyCameraController : MonoBehaviour {
 			if (visualHit.collider.name == "host"){
 				if (Input.GetMouseButtonDown (0)) {
 					visualHit.collider.GetComponent <NetworkVRUI> ().LanHost ();
+				}
+			}
+			if (visualHit.collider.name == "createMatch"){
+				if (Input.GetMouseButtonDown (0)) {
+					visualHit.collider.GetComponent <NetworkVRUI> ().CreateRoom ();
+				}
+			}
+			if (visualHit.collider.name == "single"){
+				if (Input.GetMouseButtonDown (0)) {
+					SceneManager.LoadScene ("SinglePlayer");
+				}
+			}
+			if (visualHit.collider.name == "multi"){
+				if (Input.GetMouseButtonDown (0)) {
+					SceneManager.LoadScene ("Multiplayer");
 				}
 			}
 		}

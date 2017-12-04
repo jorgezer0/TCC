@@ -22,12 +22,14 @@ public class DoorBehaviour : MonoBehaviour {
 	void Update () {
 		distance = (transform.position - player.transform.position).magnitude;
 		//Debug.Log (distance);
-		if ((distance < 2) && (!wasOpen)) {
-			OpenDoor ();
-			wasOpen = true;
-		} else if ((distance > 2) && (wasOpen)) {
+//		if ((distance < 2) && (!wasOpen)) {
+//			OpenDoor ();
+//			wasOpen = true;
+//		} else
+		if ((distance > 3) && (wasOpen)) {
 			CloseDoor ();
 		}
+
 		
 	}
 
@@ -38,6 +40,7 @@ public class DoorBehaviour : MonoBehaviour {
 			}
 		}
 		anim.SetBool ("open", true);
+		wasOpen = true;
 	}
 
 	public void CloseDoor(){
@@ -47,6 +50,15 @@ public class DoorBehaviour : MonoBehaviour {
 				portalsBefore [i].open = false;
 			}
 		}
+		wasOpen = false;
+	}
+
+	public void ButtonBehaviour(){
+		OpenDoor ();
+	}
+
+	public void CardReaderBehaviour(){
+		OpenDoor ();
 	}
 }
 

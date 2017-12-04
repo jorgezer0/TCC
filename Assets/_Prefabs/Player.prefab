@@ -482,7 +482,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1842318485403788}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 8.09, y: 0, z: -39.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4195454865545856}
@@ -758,9 +758,9 @@ MonoBehaviour:
   rayOrigin: {fileID: 4213879110343306}
   tCursor: {fileID: 1363091910408684}
   distance: 100
+  wallOffset: 1
   warpTime: 0.3
   pProces: {fileID: 11400000, guid: 9803faf976a562449af923fcb5ca8293, type: 2}
-  focusManager: {fileID: 0}
 --- !u!114 &114141818916956490
 MonoBehaviour:
   m_ObjectHideFlags: 1

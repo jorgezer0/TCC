@@ -6,6 +6,8 @@ TagManager:
   tags:
   - DoorSwitch
   - Wall
+  - Button
+  - CardReader
   layers:
   - Default
   - TransparentFX
