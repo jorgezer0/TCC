@@ -8,6 +8,10 @@ TagManager:
   - Wall
   - Button
   - CardReader
+  - Interact
+  - Controller
+  - Pocket
+  - Holder
   layers:
   - Default
   - TransparentFX
@@ -19,7 +23,7 @@ TagManager:
   - 
   - Floor
   - Wall
-  - 
+  - Interactable
   - 
   - 
   - 

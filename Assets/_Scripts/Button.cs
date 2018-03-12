@@ -5,9 +5,18 @@ using UnityEngine;
 public class Button : MonoBehaviour {
 
 	public GameObject attachedTo;
+	private Animation anim;
+	public int pulse;
 
-	public void Pressed(){
-		Debug.Log ("Pressed Button!");
-		attachedTo.BroadcastMessage ("ButtonBehaviour");
+	void Start(){
+		anim = GetComponent<Animation> ();
+	}
+
+	public void InteracBehaviour(){
+		if (!anim.isPlaying) {
+			Debug.Log ("Pressed Button!");
+			attachedTo.BroadcastMessage ("ButtonBehaviour", pulse);
+			anim.Play ();
+		}
 	}
 }

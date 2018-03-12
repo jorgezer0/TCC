@@ -1,64 +1,116 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class DoorBehaviour : MonoBehaviour {
 
 	Animator anim;
 	public GameObject player;
 	float distance;
-	bool wasOpen = false;
+	bool isOpen = false;
 
-	public List<OcclusionPortal> portalsBefore = new List<OcclusionPortal>();
-	public List<OcclusionPortal> portalsAfter = new List<OcclusionPortal>();
+	public int pulses;
+	private int reveicedPulses;
+
+	public bool isBetweenLevels = false;
+	public Object nextLevel;
+	Scene loadedScene;
+	AsyncOperation loading;
+	bool loaded = false;
+
+	public float openPos = 0.89f;
+	public float dur = 0.5f;
+	public Transform[] doors;
 
 	// Use this for initialization
 	void Start () {
+		doors = GetComponentsInChildren<Transform> ();
 		player = GameObject.Find ("Player");
 		anim = GetComponent<Animator> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		distance = (transform.position - player.transform.position).magnitude;
+//		distance = (transform.position - player.transform.position).magnitude;
 		//Debug.Log (distance);
 //		if ((distance < 2) && (!wasOpen)) {
 //			OpenDoor ();
 //			wasOpen = true;
 //		} else
-		if ((distance > 3) && (wasOpen)) {
-			CloseDoor ();
-		}
+//		if ((distance > 3) && (wasOpen)) {
+//			CloseDoor ();
+//		}
 
-		
-	}
-
-	public void OpenDoor(){
-		if (portalsAfter.Count > 0) {
-			for (int i = 0; i < portalsAfter.Count; i++) {
-				portalsAfter [i].open = true;
+		if (Input.GetKeyUp (KeyCode.B)) {
+			if (!loaded) {
+				loaded = true;
 			}
 		}
-		anim.SetBool ("open", true);
-		wasOpen = true;
+//		if (loading.isDone) {
+//			anim.SetBool ("open", true);
+//			wasOpen = true;
+//		}
+		if (Input.GetKeyUp (KeyCode.C)) {
+			if (!isOpen) {
+				StartCoroutine ("OpenDoor");
+			} else {
+				CloseDoor ();
+			}
+		}
+	}
+
+	public IEnumerator OpenDoor(){
+
+		if (isBetweenLevels) {
+			if (loading == null) {
+				loading = SceneManager.LoadSceneAsync (nextLevel.name, LoadSceneMode.Additive);
+			}
+
+			if ((loading.isDone) && (isOpen))
+				yield return null;
+
+			yield return new WaitUntil (() => loading.isDone);
+
+			if (loading.isDone) {
+				doors [1].DOLocalMoveZ (openPos, dur);
+				doors [2].DOLocalMoveZ (-openPos, dur);
+				isOpen = true;
+			}
+		} else {
+			doors [1].DOLocalMoveZ (openPos, dur);
+			doors [2].DOLocalMoveZ (-openPos, dur);
+//			anim.SetBool ("open", true);
+			isOpen = true;
+		}
 	}
 
 	public void CloseDoor(){
-		anim.SetBool ("open", false);
-		if (portalsBefore.Count > 0) {
-			for (int i = 0; i < portalsBefore.Count; i++) {
-				portalsBefore [i].open = false;
-			}
-		}
-		wasOpen = false;
+		doors [1].DOLocalMoveZ (0f, dur);
+		doors [2].DOLocalMoveZ (0f, dur);
+//		anim.SetBool ("open", false);
+		isOpen = false;
 	}
 
-	public void ButtonBehaviour(){
-		OpenDoor ();
+	public void ButtonBehaviour(int p){
+		Debug.Log (p);
+		if (p >= pulses)
+			StartCoroutine(OpenDoor ());
 	}
 
-	public void CardReaderBehaviour(){
-		OpenDoor ();
+	public void SwitchOff(){
+		CloseDoor ();
+	}
+
+	void OnTriggerExit(Collider col){
+		Debug.Log ("Passed");
+		StartCoroutine ("IdleClose");
+	}
+
+	IEnumerator IdleClose(){
+		yield return new WaitForSeconds (3);
+		CloseDoor ();
 	}
 }
 

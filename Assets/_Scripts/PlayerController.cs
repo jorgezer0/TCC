@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour {
 	public Camera cam;
 	public float rotateSpeed = 2;
 	RaycastHit hit;
+	int layerMask = 1 << 0;
 
 	public GameObject cursorCanvas;
 	public GameObject controller;
@@ -42,6 +43,7 @@ public class PlayerController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		tCursor.transform.parent = null;
 //		focusManager = GameObject.Find ("FocusManager").GetComponent<FocusManager>();
 //		Time.timeScale = 0.5f;
 
@@ -111,7 +113,7 @@ public class PlayerController : MonoBehaviour {
 //			if (controller.activeSelf) {
 //				controller.SetActive (false);
 //			}
-			if (Physics.Raycast (cam.transform.position, cam.transform.forward, out hit, distance)) {
+			if (Physics.Raycast (cam.transform.position, cam.transform.forward, out hit, distance, layerMask, QueryTriggerInteraction.Ignore)) {
 //			Debug.DrawLine (cam.transform.position, hit.point, Color.red, 2f);
 
 				line.SetPosition (0, rayOrigin.position);
@@ -127,21 +129,11 @@ public class PlayerController : MonoBehaviour {
 					tCursor.transform.position = Vector3.SmoothDamp (tCursor.transform.position, new Vector3 (hit.point.x, 0, hit.point.z), ref tCursor_velocity, 0.1f * Time.timeScale);
 				}
 
-				if (hit.collider.tag == "Button") {
+				//Interact with interactables.
+				if (hit.collider.tag == "Interact") {
 					tCursor.SetActive (false);
-					if ((Input.GetMouseButtonDown (0)) && (hit.collider.transform.position - transform.position).magnitude < 2){
-						hit.collider.GetComponent<Button> ().Pressed ();
-					}
-				} else {
-					if (!tCursor.activeSelf) {
-						tCursor.SetActive (true);
-					}
-				}
-
-				if (hit.collider.tag == "CardReader") {
-					tCursor.SetActive (false);
-					if ((Input.GetMouseButtonDown (0)) && (hit.collider.transform.position - transform.position).magnitude < 2){
-						hit.collider.GetComponent<CardReader> ().CheckCard();
+					if ((Input.GetMouseButtonDown (0)) && (hit.collider.transform.position - transform.position).magnitude < 3){
+						hit.collider.BroadcastMessage ("InteracBehaviour");
 					}
 				} else {
 					if (!tCursor.activeSelf) {
@@ -170,7 +162,7 @@ public class PlayerController : MonoBehaviour {
 		}
 		if (canWarp) {
 			pProces.motionBlur.enabled = true;
-			transform.position = Vector3.SmoothDamp (transform.position, tDestiny, ref vel, warpTime);
+			transform.position = Vector3.SmoothDamp (transform.position, tDestiny, ref vel, warpTime * Time.timeScale);
 //			transform.LookAt (focusManager.GetFocus ());
 			Vector3 normalize = new Vector3 (0, transform.rotation.eulerAngles.y, 0);
 			transform.rotation = Quaternion.Euler (normalize);
@@ -202,7 +194,7 @@ public class PlayerController : MonoBehaviour {
 				grow = false;
 //				transform.position = tCursor.transform.position;
 			}
-			if (step >= 0.5f) {
+			if (step >= 0.25f) {
 				canWarp = true;
 			}
 
