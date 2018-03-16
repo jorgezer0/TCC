@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.PostProcessing;
 //using UnityEngine.VR;
 using Kino;
@@ -35,11 +36,9 @@ public class PlayerController : MonoBehaviour {
 	BloomModel.Settings ppBloom;
 	ChromaticAberrationModel.Settings ppChromatic;
 	VignetteModel.Settings ppVignette;
-	DepthOfFieldModel.Settings ppDepth;
 	RaycastHit visualHit;
-	float tempFocusDist;
 
-	private FocusManager focusManager;
+    public Text log;
 
 	// Use this for initialization
 	void Start () {
@@ -54,15 +53,15 @@ public class PlayerController : MonoBehaviour {
 		ppBloom = pProces.bloom.settings;
 		ppChromatic = pProces.chromaticAberration.settings;
 		ppVignette = pProces.vignette.settings;
-		ppDepth = pProces.depthOfField.settings;
 	}
 
 	// Update is called once per frame
 	void Update () {
-		AdaptDepthOfField ();
 		deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
 
-		if (!OVRInput.IsControllerConnected (OVRInput.Controller.RTrackedRemote)) {
+        log.text = OVRInput.GetConnectedControllers().ToString();
+
+        if (!OVRInput.IsControllerConnected (OVRInput.Controller.RTrackedRemote)) {
 			transform.Rotate (0, Input.GetAxis ("Mouse X") * rotateSpeed, 0);
 			cam.transform.Rotate (-Input.GetAxis ("Mouse Y") * rotateSpeed, 0, 0);
 		}
@@ -71,29 +70,45 @@ public class PlayerController : MonoBehaviour {
 //			Debug.Log ("Controller Conected!");
 			cursorCanvas.SetActive (false);
 			controller.transform.localRotation = OVRInput.GetLocalControllerRotation(OVRInput.Controller.RTrackedRemote);
-			Debug.DrawRay (rayOrigin.transform.position, rayOrigin.forward);
+            
+            Debug.DrawRay (rayOrigin.transform.position, rayOrigin.forward);
 
-			if (Physics.Raycast (rayOrigin.position, rayOrigin.forward, out hit, distance)) {
-//				line.SetPosition (1, hit.point);
+			if (Physics.Raycast (rayOrigin.position, rayOrigin.forward, out hit, distance, layerMask, QueryTriggerInteraction.Ignore))
+            {
+                line.SetPosition(1, hit.point);
 
-				line.SetPosition (0, rayOrigin.position);
-				//				tCursor.transform.position = hit.point;
-				if (!tCursor.activeSelf) {
+                line.SetPosition (0, rayOrigin.position);
+
+                if (!tCursor.activeSelf) {
 					tCursor.SetActive (true);
 				}
 
 				if (hit.collider.tag == "Wall") {
 					Vector3 wallHit = hit.point - ((hit.point - rayOrigin.transform.position).normalized * wallOffset);
-					tCursor.transform.position = Vector3.SmoothDamp (tCursor.transform.position, new Vector3(wallHit.x, 0, wallHit.z), ref tCursor_velocity, 0.1f * Time.timeScale);
+					tCursor.transform.localPosition = Vector3.SmoothDamp (tCursor.transform.position, new Vector3(wallHit.x, 0, wallHit.z), ref tCursor_velocity, 0.1f * Time.timeScale);
 				} else {
-					tCursor.transform.position = Vector3.SmoothDamp (tCursor.transform.position, new Vector3 (hit.point.x, 0, hit.point.z), ref tCursor_velocity, 0.1f * Time.timeScale);
+					tCursor.transform.localPosition = Vector3.SmoothDamp (tCursor.transform.position, new Vector3 (hit.point.x, 0, hit.point.z), ref tCursor_velocity, 0.1f * Time.timeScale);
 				}
 
-//				tCursor.transform.position = new Vector3(hit.point.x, 0, hit.point.z);
-				Vector3 dir = new Vector3 (focusManager.GetFocus ().x, 0, focusManager.GetFocus ().z);
-				tCursor.transform.LookAt (dir);
-//				line.SetPosition (1, tCursor.transform.position);
-				line.SetPosition (1, hit.point);
+                //Interact with interactables.
+                if (hit.collider.tag == "Interact")
+                {
+                    tCursor.SetActive(false);
+                    if ((OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger)) && ((hit.collider.transform.position - transform.position).magnitude < 3))
+                    {
+                        hit.collider.BroadcastMessage("InteracBehaviour");
+                    }
+                }
+                else
+                {
+                    if (!tCursor.activeSelf)
+                    {
+                        tCursor.SetActive(true);
+                    }
+                }
+
+                //				line.SetPosition (1, tCursor.transform.position);
+                line.SetPosition (1, hit.point);
 
 				if (OVRInput.GetDown (OVRInput.Button.PrimaryTouchpad)) {
 					StartCoroutine ("SlowTime");
@@ -233,15 +248,6 @@ public class PlayerController : MonoBehaviour {
 		Time.timeScale = 1;
 		yield return null;
 	}
-
-	void AdaptDepthOfField(){
-		
-		if (Physics.Raycast (cam.transform.position, cam.transform.forward, out visualHit, distance)) {
-//			ppDepth.focusDistance = (cam.transform.position - hit.point).magnitude;
-			ppDepth.focusDistance = Mathf.Lerp (ppDepth.focusDistance, (cam.transform.position - visualHit.point).magnitude, ((Time.deltaTime/Time.timeScale)*4));
-			pProces.depthOfField.settings = ppDepth;
-//			Debug.Log (ppDepth.focusDistance);
-		}
-	}
+    
 }
 

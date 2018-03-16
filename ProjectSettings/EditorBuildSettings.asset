@@ -17,6 +17,6 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/_Scenes/OtherRoom.unity
     guid: c4e02f0c36f8e374abea372bed2d6c24
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/ProBuilderLevel.unity
     guid: d13481a45a9d0e94fb60f7b03dfc9ca7
