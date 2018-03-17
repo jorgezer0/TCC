@@ -38,6 +38,9 @@ public class PlayerController : MonoBehaviour {
 	VignetteModel.Settings ppVignette;
 	RaycastHit visualHit;
 
+	public Image timeGauge;
+	private Coroutine slowCountdown;
+
     public Text log;
 
 	// Use this for initialization
@@ -114,11 +117,11 @@ public class PlayerController : MonoBehaviour {
 					StartCoroutine ("SlowTime");
 				}
 
-				if (OVRInput.GetUp (OVRInput.Button.PrimaryTouchpad)) {
-					StartCoroutine ("NormalTime");
-					tDestiny = tCursor.transform.position;
-					StartCoroutine ("TeleportTo");
-				}
+//				if (OVRInput.GetUp (OVRInput.Button.PrimaryTouchpad)) {
+//					StartCoroutine ("NormalTime");
+//					tDestiny = tCursor.transform.position;
+//					StartCoroutine ("TeleportTo");
+//				}
 
 			}
 
@@ -163,15 +166,19 @@ public class PlayerController : MonoBehaviour {
 				//				line.SetPosition (1, tCursor.transform.position);
 				line.SetPosition (1, hit.point);
 				if (Input.GetMouseButtonDown (1)) {
-					Debug.Log ("Slow...");
-					StartCoroutine ("SlowTime");
+					if (Time.timeScale == 1) {
+						Debug.Log ("Slow...");
+						StartCoroutine ("SlowTime");
+					} else {
+						StopCoroutine ("SlowCountdown");
+						StartCoroutine ("NormalTime");
+					}
 				}
 
-				if (Input.GetMouseButtonUp (1)) {
+				if ((Input.GetMouseButtonUp (0)) && (hit.collider.tag != "Interact")) {
 					Debug.Log ("normal...");
 					tDestiny = tCursor.transform.position;
 					StartCoroutine ("TeleportTo");
-					StartCoroutine ("NormalTime");
 				}
 			}
 		}
@@ -187,12 +194,12 @@ public class PlayerController : MonoBehaviour {
 	IEnumerator TeleportTo(){
 		float step = 0.01f;
 		bool grow = true;
-		int speed = 5;
+		int speed = 3;
 		while (step > 0) {
 			if (grow) {
-				step += (deltaTime*Time.timeScale) * speed;
+				step += (Time.deltaTime/Time.timeScale) * speed;
 			} else {					 
-				step -= (deltaTime*Time.timeScale) * speed*2;
+				step -= (Time.deltaTime/Time.timeScale) * speed*2;
 			}
 			glitch.enabled = true;
 			glitch.scanLineJitter = step/2;
@@ -209,12 +216,11 @@ public class PlayerController : MonoBehaviour {
 				grow = false;
 //				transform.position = tCursor.transform.position;
 			}
-			if (step >= 0.25f) {
+			if (step >= 0.5f) {
 				canWarp = true;
 			}
 
-//			yield return new WaitForSeconds (1/((deltaTime/Time.timeScale) * 1000f));
-			yield return new WaitForSeconds (Time.deltaTime/Time.timeScale);
+			yield return new WaitForSeconds (Time.deltaTime);
 		}
 		pProces.motionBlur.enabled = false;
 		glitch.scanLineJitter = 0;
@@ -238,6 +244,7 @@ public class PlayerController : MonoBehaviour {
 			Time.timeScale -= 0.05f;
 		}
 		yield return null;
+		StartCoroutine ("SlowCountdown", 5f);
 	}
 
 	IEnumerator NormalTime(){
@@ -246,7 +253,28 @@ public class PlayerController : MonoBehaviour {
 			Time.timeScale += 0.01f;
 		}
 		Time.timeScale = 1;
+		StartCoroutine ("RefilGauge");
 		yield return null;
+	}
+
+	IEnumerator SlowCountdown(float time){
+		float timeInSlow = time;
+		while (timeInSlow > 0) {
+			timeInSlow -= Time.deltaTime / Time.timeScale;
+			Debug.Log (timeInSlow);
+			timeGauge.fillAmount = timeInSlow / time;
+			yield return new WaitForSeconds (Time.deltaTime);
+		}
+		StartCoroutine ("NormalTime");
+		yield return null;
+	}
+
+	IEnumerator RefilGauge(){
+		while (timeGauge.fillAmount < 1){
+			timeGauge.fillAmount += 0.05f;
+			yield return new WaitForSeconds (Time.deltaTime);
+		}
+		timeGauge.fillAmount = 1f;
 	}
     
 }
