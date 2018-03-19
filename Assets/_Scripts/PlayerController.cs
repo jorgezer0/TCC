@@ -39,7 +39,8 @@ public class PlayerController : MonoBehaviour {
 	RaycastHit visualHit;
 
 	public Image timeGauge;
-	private Coroutine slowCountdown;
+	public float timeInSlow = 5f;
+	public float refilTime = 5f;
 
     public Text log;
 
@@ -176,7 +177,6 @@ public class PlayerController : MonoBehaviour {
 				}
 
 				if ((Input.GetMouseButtonUp (0)) && (hit.collider.tag != "Interact")) {
-					Debug.Log ("normal...");
 					tDestiny = tCursor.transform.position;
 					StartCoroutine ("TeleportTo");
 				}
@@ -243,38 +243,47 @@ public class PlayerController : MonoBehaviour {
 		while (Time.timeScale > 0.05f) {
 			Time.timeScale -= 0.05f;
 		}
+		Time.timeScale = 0.01f;
 		yield return null;
-		StartCoroutine ("SlowCountdown", 5f);
+		StartCoroutine ("SlowCountdown", timeInSlow);
 	}
 
 	IEnumerator NormalTime(){
-//		yield return new WaitForSeconds (2f);
 		while (Time.timeScale < 1f) {
 			Time.timeScale += 0.01f;
 		}
 		Time.timeScale = 1;
-		StartCoroutine ("RefilGauge");
+		StartCoroutine ("RefilGauge", refilTime);
 		yield return null;
 	}
 
 	IEnumerator SlowCountdown(float time){
-		float timeInSlow = time;
-		while (timeInSlow > 0) {
-			timeInSlow -= Time.deltaTime / Time.timeScale;
-			Debug.Log (timeInSlow);
-			timeGauge.fillAmount = timeInSlow / time;
+		float tempTimeInSlow = time;
+		while (tempTimeInSlow > 0) {
+			tempTimeInSlow -= Time.deltaTime / Time.timeScale;
+			timeGauge.fillAmount = tempTimeInSlow / time;
 			yield return new WaitForSeconds (Time.deltaTime);
 		}
 		StartCoroutine ("NormalTime");
 		yield return null;
 	}
 
-	IEnumerator RefilGauge(){
-		while (timeGauge.fillAmount < 1){
-			timeGauge.fillAmount += 0.05f;
+	IEnumerator RefilGauge(float time){
+		float timeRefil = timeGauge.fillAmount * refilTime;
+		while (timeRefil < refilTime){
+			timeRefil += Time.deltaTime / Time.timeScale;
+			timeGauge.fillAmount = timeRefil / time;
 			yield return new WaitForSeconds (Time.deltaTime);
 		}
 		timeGauge.fillAmount = 1f;
+	}
+
+	void OnCollisionEnter(Collision col){
+		if (col.transform.tag == "Platform") {
+			transform.parent = col.transform;
+		} else {
+			transform.parent = null;
+		}
 	}
     
 }

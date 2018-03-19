@@ -12,6 +12,7 @@ TagManager:
   - Controller
   - Pocket
   - Holder
+  - Platform
   layers:
   - Default
   - TransparentFX
