@@ -113,18 +113,28 @@ public class PlayerController : MonoBehaviour {
 
                 //				line.SetPosition (1, tCursor.transform.position);
                 line.SetPosition (1, hit.point);
+                
+                if (OVRInput.GetDown(OVRInput.Button.PrimaryTouchpad))
+                    {
+                    if (Time.timeScale == 1)
+                    {
+                        Debug.Log("Slow...");
+                        StartCoroutine("SlowTime");
+                    }
+                    else
+                    {
+                        StopCoroutine("SlowCountdown");
+                        StartCoroutine("NormalTime");
+                    }
+                }
 
-				if (OVRInput.GetDown (OVRInput.Button.PrimaryTouchpad)) {
-					StartCoroutine ("SlowTime");
-				}
+                if ((OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger)) && (hit.collider.tag != "Interact"))
+                {
+                    tDestiny = tCursor.transform.position;
+                    StartCoroutine("TeleportTo");
+                }
 
-//				if (OVRInput.GetUp (OVRInput.Button.PrimaryTouchpad)) {
-//					StartCoroutine ("NormalTime");
-//					tDestiny = tCursor.transform.position;
-//					StartCoroutine ("TeleportTo");
-//				}
-
-			}
+            }
 
 		} else {
 //			Debug.Log ("Controller Disconected!");
@@ -166,21 +176,27 @@ public class PlayerController : MonoBehaviour {
 				particleLine.LookAt (hit.point);
 				//				line.SetPosition (1, tCursor.transform.position);
 				line.SetPosition (1, hit.point);
-				if (Input.GetMouseButtonDown (1)) {
-					if (Time.timeScale == 1) {
-						Debug.Log ("Slow...");
-						StartCoroutine ("SlowTime");
-					} else {
-						StopCoroutine ("SlowCountdown");
-						StartCoroutine ("NormalTime");
-					}
-				}
 
-				if ((Input.GetMouseButtonUp (0)) && (hit.collider.tag != "Interact")) {
-					tDestiny = tCursor.transform.position;
-					StartCoroutine ("TeleportTo");
-				}
-			}
+                if (Input.GetMouseButtonDown(1))
+                {
+                    if (Time.timeScale == 1)
+                    {
+                        Debug.Log("Slow...");
+                        StartCoroutine("SlowTime");
+                    }
+                    else
+                    {
+                        StopCoroutine("SlowCountdown");
+                        StartCoroutine("NormalTime");
+                    }
+                }
+
+                if ((Input.GetMouseButtonUp(0)) && (hit.collider.tag != "Interact"))
+                {
+                    tDestiny = tCursor.transform.position;
+                    StartCoroutine("TeleportTo");
+                }
+            }
 		}
 		if (canWarp) {
 			pProces.motionBlur.enabled = true;
