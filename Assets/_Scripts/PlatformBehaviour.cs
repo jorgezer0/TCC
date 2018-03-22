@@ -9,19 +9,22 @@ public class PlatformBehaviour : MonoBehaviour {
 	public Transform start;
 	public Transform end;
 	public float speed;
+	public float delay;
 
 	// Use this for initialization
 	void Start () {
-		
+		Go ();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-		if ((platform.localPosition - start.localPosition).magnitude < 0.05f) {
-			platform.DOMove (end.position, speed);
-		} else if ((platform.localPosition - end.localPosition).magnitude < 0.05f){
-			platform.DOMove (start.position, speed);
-		}
+
+	void Go(){
+		platform.DOMove (end.position, speed).OnComplete(() => {
+			Back();
+		});
+	}
+
+	void Back(){
+		platform.DOMove (start.position, speed).SetDelay(delay).OnComplete(() => {
+			Go();
+		});
 	}
 }
