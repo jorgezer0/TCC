@@ -28,6 +28,11 @@ public class PlayerController : MonoBehaviour {
 	Vector3 vel = Vector3.zero;
 	bool canWarp = false;
 	public float warpTime;
+	public float teleCharge;
+	private float tempCharge = 0;
+	public Image chargeGauge;
+	private bool canCharge = true;
+
 	AnalogGlitch glitch;
 	Vignette vignette;
 	Bloom bloom;
@@ -191,11 +196,23 @@ public class PlayerController : MonoBehaviour {
                     }
                 }
 
-                if ((Input.GetMouseButtonUp(0)) && (hit.collider.tag != "Interact"))
-                {
-                    tDestiny = tCursor.transform.position;
-                    StartCoroutine("TeleportTo");
-                }
+				if ((Input.GetMouseButton (0)) && (hit.collider.tag != "Interact") && (canCharge)) {
+					tempCharge += Time.deltaTime;
+					chargeGauge.fillAmount = tempCharge / teleCharge;
+					if (tempCharge >= teleCharge) {
+						canCharge = false;
+						tDestiny = tCursor.transform.position;
+						StartCoroutine ("TeleportTo");
+						tempCharge = 0;
+						chargeGauge.fillAmount = 0;
+					}
+				} else if (tempCharge > 0) {
+					canCharge = true;
+					tempCharge = 0;
+					chargeGauge.fillAmount = 0;
+				} else {
+					canCharge = true;
+				}
             }
 		}
 		if (canWarp) {

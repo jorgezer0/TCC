@@ -1,27 +1,52 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Switch : MonoBehaviour {
 
 	public GameObject attachedTo;
 	public int pulse;
 	public bool on = false;
-	private Animation anim;
+	public float onPos;
+	public Transform switchTransform;
+	private float dur = 0.5f;
+	private MeshRenderer switchRenderer;
+	public Color onColor;
+	public Color offColor;
+	public MeshRenderer line;
+	public MeshRenderer display;
 
 	// Use this for initialization
 	void Start () {
-		anim = GetComponent<Animation> ();
+		switchRenderer = switchTransform.GetComponent<MeshRenderer> ();
+		if (on) {
+			switchTransform.localPosition = new Vector3 (0, onPos, onPos);
+			switchRenderer.material.color = onColor;
+			line.material.color = onColor;
+			display.material.color = onColor;
+		} else {
+			switchTransform.localPosition = new Vector3 (0, -onPos, onPos);
+			switchRenderer.material.color = offColor;
+			line.material.color = offColor;
+			display.material.color = offColor;
+		}
 	}
 	
 	public void InteracBehaviour(){
 		on = !on;
 		if (on) {
-			anim.Play ("SwitchOn");
+			switchTransform.DOLocalMoveY (onPos, dur);
+			switchRenderer.material.DOColor (onColor, dur);
+			line.material.DOColor (onColor, dur);
+			display.material.DOColor (onColor, dur);
 			attachedTo.BroadcastMessage ("ButtonBehaviour", pulse);
 		} else {
-			anim.Play ("SwitchOff");
-			attachedTo.BroadcastMessage ("SwitchOff");
+			switchTransform.DOLocalMoveY (-onPos, dur);
+			switchRenderer.material.DOColor (offColor, dur);
+			line.material.DOColor (offColor, dur);
+			display.material.DOColor (offColor, dur);
+			attachedTo.BroadcastMessage ("ButtonBehaviour", -pulse);
 		}
 	}
 

@@ -7,12 +7,14 @@ using DG.Tweening;
 public class DoorBehaviour : MonoBehaviour {
 
 	Animator anim;
-	public GameObject player;
+	private GameObject player;
+	public bool _open = false;
 	float distance;
 	bool isOpen = false;
 
 	public int pulses;
-	private int reveicedPulses;
+	public bool aditivePulses;
+	private int receivedPulses;
 
 	public bool isBetweenLevels = false;
 	public Object nextLevel;
@@ -24,9 +26,15 @@ public class DoorBehaviour : MonoBehaviour {
 	public float dur = 0.5f;
 	public Transform[] doors;
 
-	// Use this for initialization
-	void Start () {
+	void Awake(){
 		doors = GetComponentsInChildren<Transform> ();
+		if (_open) {
+			doors [1].localPosition = new Vector3 (0, 0, openPos);
+			doors [2].localPosition = new Vector3 (0, 0, -openPos);
+		}
+	}
+
+	void Start () {
 		player = GameObject.Find ("Player");
 		anim = GetComponent<Animator> ();
 	}
@@ -43,15 +51,6 @@ public class DoorBehaviour : MonoBehaviour {
 //			CloseDoor ();
 //		}
 
-		if (Input.GetKeyUp (KeyCode.B)) {
-			if (!loaded) {
-				loaded = true;
-			}
-		}
-//		if (loading.isDone) {
-//			anim.SetBool ("open", true);
-//			wasOpen = true;
-//		}
 		if (Input.GetKeyUp (KeyCode.C)) {
 			if (!isOpen) {
 				StartCoroutine ("OpenDoor");
@@ -94,9 +93,18 @@ public class DoorBehaviour : MonoBehaviour {
 	}
 
 	public void ButtonBehaviour(int p){
-		Debug.Log (p);
-		if (p >= pulses)
-			StartCoroutine(OpenDoor ());
+		if (aditivePulses) {
+			receivedPulses += p;
+		} else {
+			receivedPulses = p;
+		}
+
+		if (receivedPulses >= pulses) {
+			StartCoroutine (OpenDoor ());
+		} else {
+			if (isOpen)
+				CloseDoor ();
+		}
 	}
 
 	public void SwitchOff(){
