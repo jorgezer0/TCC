@@ -48,9 +48,7 @@ Shader "Custom/SimpleUnlitTexturedColoredShader"
             v2f vert (appdata v)
             {
                 v2f o;
-
                 v.vertex.xyz += v.normal * _Offset;
-
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = v.uv;
                 return o;

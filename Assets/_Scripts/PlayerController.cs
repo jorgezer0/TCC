@@ -133,11 +133,24 @@ public class PlayerController : MonoBehaviour {
                     }
                 }
 
-                if ((OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger)) && (hit.collider.tag != "Interact"))
+				if ((OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger)) && (hit.collider.tag != "Interact"))
                 {
-                    tDestiny = tCursor.transform.position;
-                    StartCoroutine("TeleportTo");
-                }
+					tempCharge += Time.deltaTime;
+					chargeGauge.fillAmount = tempCharge / teleCharge;
+					if (tempCharge >= teleCharge) {
+						canCharge = false;
+						tDestiny = tCursor.transform.position;
+						StartCoroutine ("TeleportTo");
+						tempCharge = 0;
+						chargeGauge.fillAmount = 0;
+					}
+				} else if (tempCharge > 0) {
+					canCharge = true;
+					tempCharge = 0;
+					chargeGauge.fillAmount = 0;
+				} else {
+					canCharge = true;
+				}
 
             }
 
