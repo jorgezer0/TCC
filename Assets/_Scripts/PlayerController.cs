@@ -43,6 +43,9 @@ public class PlayerController : MonoBehaviour {
 	VignetteModel.Settings ppVignette;
 	RaycastHit visualHit;
 
+	Animator camAnim;
+	CameraBlit camBlit;
+
 	public Image timeGauge;
 	public float timeInSlow = 5f;
 	public float refilTime = 5f;
@@ -55,6 +58,8 @@ public class PlayerController : MonoBehaviour {
 //		focusManager = GameObject.Find ("FocusManager").GetComponent<FocusManager>();
 //		Time.timeScale = 0.5f;
 
+		camAnim = cam.GetComponent<Animator> ();
+		camBlit = cam.GetComponent<CameraBlit> ();
 		glitch = cam.GetComponent<AnalogGlitch> ();
 		vignette = cam.GetComponent<Vignette> ();
 		bloom = cam.GetComponent<Bloom> ();
@@ -140,7 +145,8 @@ public class PlayerController : MonoBehaviour {
 					if (tempCharge >= teleCharge) {
 						canCharge = false;
 						tDestiny = tCursor.transform.position;
-						StartCoroutine ("TeleportTo");
+						//StartCoroutine ("TeleportTo");
+						camAnim.Play("TeleportTunel");
 						tempCharge = 0;
 						chargeGauge.fillAmount = 0;
 					}
@@ -215,7 +221,8 @@ public class PlayerController : MonoBehaviour {
 					if (tempCharge >= teleCharge) {
 						canCharge = false;
 						tDestiny = tCursor.transform.position;
-						StartCoroutine ("TeleportTo");
+						//StartCoroutine ("TeleportTo");
+						camAnim.SetTrigger("play");
 						tempCharge = 0;
 						chargeGauge.fillAmount = 0;
 					}
@@ -228,7 +235,7 @@ public class PlayerController : MonoBehaviour {
 				}
             }
 		}
-		if (canWarp) {
+		if (camBlit.amount >= 0.7f) {
 			pProces.motionBlur.enabled = true;
 			transform.position = Vector3.SmoothDamp (transform.position, tDestiny, ref vel, warpTime * Time.timeScale);
 //			transform.LookAt (focusManager.GetFocus ());
@@ -247,6 +254,7 @@ public class PlayerController : MonoBehaviour {
 			} else {					 
 				step -= (Time.deltaTime/Time.timeScale) * speed*2;
 			}
+			camBlit.amount = step * 2;
 			glitch.enabled = true;
 			glitch.scanLineJitter = step/2;
 			glitch.colorDrift = step/4;
@@ -269,6 +277,7 @@ public class PlayerController : MonoBehaviour {
 			yield return new WaitForSeconds (Time.deltaTime);
 		}
 		pProces.motionBlur.enabled = false;
+		camBlit.amount = 0;
 		glitch.scanLineJitter = 0;
 		glitch.horizontalShake = 0;
 		glitch.colorDrift = 0;
