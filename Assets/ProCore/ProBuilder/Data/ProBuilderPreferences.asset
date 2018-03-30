@@ -32,10 +32,11 @@ MonoBehaviour:
   - pbCurrentMaterialPalette
   - pb_UVTemplate_lineColor
   - pb_UVTemplate_backgroundColor
+  - pbVertexColorPrefs4
   m_Color_keys: []
   m_Material_keys: []
   m_Bool_values: 010000000101
-  m_Int_values: 000000000200000001000000000000000000000000040000
+  m_Int_values: 000000000100000001000000000000000000000000040000
   m_Float_values:
   - 0
   - 0
@@ -43,5 +44,6 @@ MonoBehaviour:
   - Assets/ProCore/ProBuilder/Data/Default Material Palette.asset
   - RGBA(0.963, 0.113, 0.113, 1.000)
   - RGBA(1.000, 1.000, 1.000, 1.000)
+  - RGBA(0.184, 0.698, 0.208, 1.000)
   m_Color_values: []
   m_Material_values: []
