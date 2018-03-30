@@ -60,7 +60,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1023412562383896}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -29.5, y: 1.5, z: -5}
+  m_LocalPosition: {x: -29.5, y: 2.5, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4885716015049026}
@@ -1262,5 +1262,7 @@ MonoBehaviour:
   on: 0
   onPos: 0.1
   switchTransform: {fileID: 4885716015049026}
-  onColor: {r: 0.024870224, g: 0.6764706, b: 0.05632685, a: 1}
-  offColor: {r: 1, g: 0.19852942, b: 0.19852942, a: 1}
+  onColor: {r: 0.15570931, g: 0.7058823, b: 0.18226944, a: 1}
+  offColor: {r: 0.7058823, g: 0.52941173, b: 0.52941173, a: 1}
+  line: {fileID: 0}
+  display: {fileID: 0}

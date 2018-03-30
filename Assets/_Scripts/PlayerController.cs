@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Cursor.lockState = CursorLockMode.Locked;
 		tCursor.transform.parent = null;
 //		focusManager = GameObject.Find ("FocusManager").GetComponent<FocusManager>();
 //		Time.timeScale = 0.5f;
@@ -216,12 +217,13 @@ public class PlayerController : MonoBehaviour {
                 }
 
 				if ((Input.GetMouseButton (0)) && (hit.collider.tag != "Interact") && (canCharge)) {
-					tempCharge += Time.deltaTime;
+					tempCharge += Time.deltaTime / Time.timeScale;
 					chargeGauge.fillAmount = tempCharge / teleCharge;
 					if (tempCharge >= teleCharge) {
 						canCharge = false;
 						tDestiny = tCursor.transform.position;
 						//StartCoroutine ("TeleportTo");
+						camAnim.speed /= Time.timeScale;
 						camAnim.SetTrigger("play");
 						tempCharge = 0;
 						chargeGauge.fillAmount = 0;

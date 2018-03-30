@@ -9,6 +9,7 @@ public class DoorBehaviour : MonoBehaviour {
 	Animator anim;
 	private GameObject player;
 	public bool _open = false;
+	public bool autoClose = false;
 	float distance;
 	bool isOpen = false;
 
@@ -113,11 +114,12 @@ public class DoorBehaviour : MonoBehaviour {
 
 	void OnTriggerExit(Collider col){
 		Debug.Log ("Passed");
-		StartCoroutine ("IdleClose");
+		if (autoClose)
+			StartCoroutine ("IdleClose");
 	}
 
 	IEnumerator IdleClose(){
-		yield return new WaitForSeconds (3);
+		yield return null;
 		CloseDoor ();
 	}
 }
