@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour {
 	public float teleCharge;
 	private float tempCharge = 0;
 	public Image chargeGauge;
+	public Animator chargeGaugeAnim;
 	private bool canCharge = true;
 
 	AnalogGlitch glitch;
@@ -47,6 +48,7 @@ public class PlayerController : MonoBehaviour {
 	CameraBlit camBlit;
 
 	public Image timeGauge;
+	private Animator timeGaugeAnim;
 	public float timeInSlow = 5f;
 	public float refilTime = 5f;
 
@@ -56,6 +58,9 @@ public class PlayerController : MonoBehaviour {
 	void Start () {
 		Cursor.lockState = CursorLockMode.Locked;
 		tCursor.transform.parent = null;
+
+		timeGaugeAnim = timeGauge.GetComponent<Animator> ();
+		chargeGaugeAnim = chargeGauge.GetComponent<Animator> ();
 //		focusManager = GameObject.Find ("FocusManager").GetComponent<FocusManager>();
 //		Time.timeScale = 0.5f;
 
@@ -125,18 +130,8 @@ public class PlayerController : MonoBehaviour {
                 //				line.SetPosition (1, tCursor.transform.position);
                 line.SetPosition (1, hit.point);
                 
-                if (OVRInput.GetDown(OVRInput.Button.PrimaryTouchpad))
-                    {
-                    if (Time.timeScale == 1)
-                    {
-                        Debug.Log("Slow...");
-                        StartCoroutine("SlowTime");
-                    }
-                    else
-                    {
-                        StopCoroutine("SlowCountdown");
-                        StartCoroutine("NormalTime");
-                    }
+				if (OVRInput.GetDown(OVRInput.Button.PrimaryTouchpad)){
+					SlowCountdown ();
                 }
 
 				if ((OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger)) && (hit.collider.tag != "Interact"))
@@ -204,144 +199,118 @@ public class PlayerController : MonoBehaviour {
 
                 if (Input.GetMouseButtonDown(1))
                 {
-                    if (Time.timeScale == 1)
-                    {
-                        Debug.Log("Slow...");
-                        StartCoroutine("SlowTime");
-                    }
-                    else
-                    {
-                        StopCoroutine("SlowCountdown");
-                        StartCoroutine("NormalTime");
-                    }
+					SlowCountdown ();
                 }
 
-				if ((Input.GetMouseButton (0)) && (hit.collider.tag != "Interact") && (canCharge)) {
-					tempCharge += Time.deltaTime / Time.timeScale;
-					chargeGauge.fillAmount = tempCharge / teleCharge;
-					if (tempCharge >= teleCharge) {
-						canCharge = false;
-						tDestiny = tCursor.transform.position;
-						//StartCoroutine ("TeleportTo");
-						camAnim.speed /= Time.timeScale;
-						camAnim.SetTrigger("play");
-						tempCharge = 0;
-						chargeGauge.fillAmount = 0;
+				if (Input.GetMouseButtonDown (0)) {
+					if (!chargeGaugeAnim.GetBool ("charge")) {
+						chargeGaugeAnim.SetBool ("charge", true);
+						chargeGaugeAnim.SetBool ("idle", false);
+						chargeGaugeAnim.SetFloat ("speed", chargeGaugeAnim.speed / Time.timeScale);
+					} 
+				} else if (Input.GetMouseButtonUp (0)) {
+					if (chargeGaugeAnim.GetBool ("charge")) {
+						chargeGaugeAnim.SetBool ("charge", false);
+						chargeGaugeAnim.SetFloat ("speed", -chargeGaugeAnim.speed / Time.timeScale);
 					}
-				} else if (tempCharge > 0) {
-					canCharge = true;
-					tempCharge = 0;
-					chargeGauge.fillAmount = 0;
-				} else {
-					canCharge = true;
 				}
             }
 		}
-		if (camBlit.amount >= 0.7f) {
+		if (canWarp) {
 			pProces.motionBlur.enabled = true;
 			transform.position = Vector3.SmoothDamp (transform.position, tDestiny, ref vel, warpTime * Time.timeScale);
 //			transform.LookAt (focusManager.GetFocus ());
 			Vector3 normalize = new Vector3 (0, transform.rotation.eulerAngles.y, 0);
 			transform.rotation = Quaternion.Euler (normalize);
-		}
-	}
-
-	IEnumerator TeleportTo(){
-		float step = 0.01f;
-		bool grow = true;
-		int speed = 3;
-		while (step > 0) {
-			if (grow) {
-				step += (Time.deltaTime/Time.timeScale) * speed;
-			} else {					 
-				step -= (Time.deltaTime/Time.timeScale) * speed*2;
+			Debug.Log (Vector3.Distance (transform.position, tDestiny));
+			if (Vector3.Distance (transform.position, tDestiny) < 0.15f) {
+				canWarp = false;
+				camAnim.SetBool ("play", false);
+				camAnim.SetBool ("arrived", true);
 			}
-			camBlit.amount = step * 2;
-			glitch.enabled = true;
-			glitch.scanLineJitter = step/2;
-			glitch.colorDrift = step/4;
-//			bloom.intensity = step*10;
-//			vignette.intensity = step;
-			ppBloom.bloom.intensity = step;
-			ppChromatic.intensity = step;
-			ppVignette.intensity = step;
-			pProces.bloom.settings = ppBloom;
-			pProces.chromaticAberration.settings = ppChromatic;
-			pProces.vignette.settings = ppVignette;
-			if (step >= 1) {
-				grow = false;
-//				transform.position = tCursor.transform.position;
+		}
+	}
+
+	public void StartTeleport(){
+		tDestiny = tCursor.transform.position;
+		camAnim.SetFloat("speed", camAnim.speed / Time.timeScale);
+		camAnim.SetBool ("play", true);
+		camAnim.SetBool ("arrived", false);
+	}
+
+	public void Teleport(){
+		canWarp = true;
+	}
+
+	void SlowCountdown(){
+		if (!timeGaugeAnim.GetBool ("slow")) {
+			TimeManager.instance.SlowTime ();
+			if (timeGaugeAnim.GetCurrentAnimatorStateInfo (0).IsName ("TimeGauge")) {
+				float tempTime = timeGaugeAnim.GetCurrentAnimatorStateInfo (0).normalizedTime;
+				float tempNorm = tempTime - Mathf.FloorToInt (tempTime);
+				timeGaugeAnim.Play ("TimeGauge", 0, tempNorm);
 			}
-			if (step >= 0.5f) {
-				canWarp = true;
-			}
-
-			yield return new WaitForSeconds (Time.deltaTime);
-		}
-		pProces.motionBlur.enabled = false;
-		camBlit.amount = 0;
-		glitch.scanLineJitter = 0;
-		glitch.horizontalShake = 0;
-		glitch.colorDrift = 0;
-		glitch.enabled = false;
-//		bloom.intensity = 0;
-//		vignette.intensity = 0;
-		ppBloom.bloom.intensity = 0;
-		ppChromatic.intensity = 0;
-		ppVignette.intensity = 0;
-		canWarp = false;
-		pProces.bloom.settings = ppBloom;
-		pProces.chromaticAberration.settings = ppChromatic;
-		pProces.vignette.settings = ppVignette;
-		yield return null;
-	}
-
-	IEnumerator SlowTime(){
-		while (Time.timeScale > 0.05f) {
-			Time.timeScale -= 0.05f;
-		}
-		Time.timeScale = 0.01f;
-		yield return null;
-		StartCoroutine ("SlowCountdown", timeInSlow);
-	}
-
-	IEnumerator NormalTime(){
-		while (Time.timeScale < 1f) {
-			Time.timeScale += 0.01f;
-		}
-		Time.timeScale = 1;
-		StartCoroutine ("RefilGauge", refilTime);
-		yield return null;
-	}
-
-	IEnumerator SlowCountdown(float time){
-		float tempTimeInSlow = time;
-		while (tempTimeInSlow > 0) {
-			tempTimeInSlow -= Time.deltaTime / Time.timeScale;
-			timeGauge.fillAmount = tempTimeInSlow / time;
-			yield return new WaitForSeconds (Time.deltaTime);
-		}
-		StartCoroutine ("NormalTime");
-		yield return null;
-	}
-
-	IEnumerator RefilGauge(float time){
-		float timeRefil = timeGauge.fillAmount * refilTime;
-		while (timeRefil < refilTime){
-			timeRefil += Time.deltaTime / Time.timeScale;
-			timeGauge.fillAmount = timeRefil / time;
-			yield return new WaitForSeconds (Time.deltaTime);
-		}
-		timeGauge.fillAmount = 1f;
-	}
-
-	void OnCollisionEnter(Collision col){
-		if (col.transform.tag == "Platform") {
-			transform.parent = col.transform;
+			timeGaugeAnim.SetFloat ("speed", (timeGaugeAnim.speed / Time.timeScale));
+			timeGaugeAnim.SetBool ("full", false);
+			timeGaugeAnim.SetBool ("slow", true);
 		} else {
-			transform.parent = null;
+			timeGaugeAnim.SetFloat ("speed", -0.5f);
+			timeGaugeAnim.SetBool ("slow", false);
+			TimeManager.instance.NormalTime ();
 		}
+		
 	}
+
+//	IEnumerator TeleportTo(){
+//		float step = 0.01f;
+//		bool grow = true;
+//		int speed = 3;
+//		while (step > 0) {
+//			if (grow) {
+//				step += (Time.deltaTime/Time.timeScale) * speed;
+//			} else {					 
+//				step -= (Time.deltaTime/Time.timeScale) * speed*2;
+//			}
+//			camBlit.amount = step * 2;
+//			glitch.enabled = true;
+//			glitch.scanLineJitter = step/2;
+//			glitch.colorDrift = step/4;
+////			bloom.intensity = step*10;
+////			vignette.intensity = step;
+//			ppBloom.bloom.intensity = step;
+//			ppChromatic.intensity = step;
+//			ppVignette.intensity = step;
+//			pProces.bloom.settings = ppBloom;
+//			pProces.chromaticAberration.settings = ppChromatic;
+//			pProces.vignette.settings = ppVignette;
+//			if (step >= 1) {
+//				grow = false;
+////				transform.position = tCursor.transform.position;
+//			}
+//			if (step >= 0.5f) {
+//				canWarp = true;
+//			}
+//
+//			yield return new WaitForSeconds (Time.deltaTime);
+//		}
+//		pProces.motionBlur.enabled = false;
+//		camBlit.amount = 0;
+//		glitch.scanLineJitter = 0;
+//		glitch.horizontalShake = 0;
+//		glitch.colorDrift = 0;
+//		glitch.enabled = false;
+////		bloom.intensity = 0;
+////		vignette.intensity = 0;
+//		ppBloom.bloom.intensity = 0;
+//		ppChromatic.intensity = 0;
+//		ppVignette.intensity = 0;
+//		canWarp = false;
+//		pProces.bloom.settings = ppBloom;
+//		pProces.chromaticAberration.settings = ppChromatic;
+//		pProces.vignette.settings = ppVignette;
+//		yield return null;
+//	}
+
     
 }
 
