@@ -49,8 +49,14 @@ public class PlayerController : MonoBehaviour {
 
 	public Image timeGauge;
 	private Animator timeGaugeAnim;
-	public float timeInSlow = 5f;
-	public float refilTime = 5f;
+
+	private Vector3 firstPos;
+	private Vector3 lastPos;
+	private float cursorDelta;
+	public float cursorThreshold;
+	private bool breakCharge = false;
+
+	public Vector3 checkPoint;
 
     public Text log;
 
@@ -202,18 +208,29 @@ public class PlayerController : MonoBehaviour {
 					SlowCountdown ();
                 }
 
-				if (Input.GetMouseButtonDown (0)) {
+				if (Input.GetMouseButton (0)) {
 					if (!chargeGaugeAnim.GetBool ("charge")) {
+						firstPos = tCursor.transform.position;
 						chargeGaugeAnim.SetBool ("charge", true);
 						chargeGaugeAnim.SetBool ("idle", false);
 						chargeGaugeAnim.SetFloat ("speed", chargeGaugeAnim.speed / Time.timeScale);
-					} 
-				} else if (Input.GetMouseButtonUp (0)) {
-					if (chargeGaugeAnim.GetBool ("charge")) {
-						chargeGaugeAnim.SetBool ("charge", false);
-						chargeGaugeAnim.SetFloat ("speed", -chargeGaugeAnim.speed / Time.timeScale);
+					}
+
+					lastPos = tCursor.transform.position;
+					cursorDelta = Vector3.Distance(firstPos, lastPos);
+					if (cursorDelta > cursorThreshold){
+						breakCharge = true;
 					}
 				}
+				if ((Input.GetMouseButtonUp (0)) || (breakCharge)){
+					if (chargeGaugeAnim.GetBool ("charge")) {
+						chargeGaugeAnim.SetBool ("charge", false);
+						chargeGaugeAnim.SetBool ("idle", true);
+						chargeGaugeAnim.SetFloat ("speed", -chargeGaugeAnim.speed/2 / Time.timeScale);
+						breakCharge = false;
+					}
+				}
+
             }
 		}
 		if (canWarp) {
@@ -222,7 +239,6 @@ public class PlayerController : MonoBehaviour {
 //			transform.LookAt (focusManager.GetFocus ());
 			Vector3 normalize = new Vector3 (0, transform.rotation.eulerAngles.y, 0);
 			transform.rotation = Quaternion.Euler (normalize);
-			Debug.Log (Vector3.Distance (transform.position, tDestiny));
 			if (Vector3.Distance (transform.position, tDestiny) < 0.15f) {
 				canWarp = false;
 				camAnim.SetBool ("play", false);
@@ -260,6 +276,7 @@ public class PlayerController : MonoBehaviour {
 		}
 		
 	}
+
 
 //	IEnumerator TeleportTo(){
 //		float step = 0.01f;

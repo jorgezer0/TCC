@@ -7,8 +7,8 @@ using DG.Tweening;
 public class DoorBehaviour : MonoBehaviour {
 
 	Animator anim;
-	private GameObject player;
 	public bool _open = false;
+	public bool _broken = false;
 	public bool autoClose = false;
 	float distance;
 	bool isOpen = false;
@@ -26,74 +26,45 @@ public class DoorBehaviour : MonoBehaviour {
 	public float openPos = 0.89f;
 	public float dur = 0.5f;
 	public Transform[] doors;
+	public Transform checkPoint;
 
 	void Awake(){
 		doors = GetComponentsInChildren<Transform> ();
-		if (_open) {
-			doors [1].localPosition = new Vector3 (0, 0, openPos);
-			doors [2].localPosition = new Vector3 (0, 0, -openPos);
-		}
 	}
 
 	void Start () {
-		player = GameObject.Find ("Player");
 		anim = GetComponent<Animator> ();
+		if (_open)
+			ChangeDoorState ();
+		if (_broken)
+			BreakeDoor ();
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-//		distance = (transform.position - player.transform.position).magnitude;
-		//Debug.Log (distance);
-//		if ((distance < 2) && (!wasOpen)) {
-//			OpenDoor ();
-//			wasOpen = true;
-//		} else
-//		if ((distance > 3) && (wasOpen)) {
-//			CloseDoor ();
-//		}
-
 		if (Input.GetKeyUp (KeyCode.C)) {
-			if (!isOpen) {
-				StartCoroutine ("OpenDoor");
-			} else {
-				CloseDoor ();
-			}
+			ChangeDoorState ();
 		}
 	}
 
-	public IEnumerator OpenDoor(){
+	public void ChangeDoorState(){
+		
+		anim.SetTrigger ("change");
+		isOpen = true;
 
-		if (isBetweenLevels) {
-			if (loading == null) {
-				loading = SceneManager.LoadSceneAsync (nextLevel.name, LoadSceneMode.Additive);
-			}
-
-			if ((loading.isDone) && (isOpen))
-				yield return null;
-
-			yield return new WaitUntil (() => loading.isDone);
-
-			if (loading.isDone) {
-				doors [1].DOLocalMoveZ (openPos, dur);
-				doors [2].DOLocalMoveZ (-openPos, dur);
-				isOpen = true;
-			}
-		} else {
-			doors [1].DOLocalMoveZ (openPos, dur);
-			doors [2].DOLocalMoveZ (-openPos, dur);
-//			anim.SetBool ("open", true);
-			isOpen = true;
-		}
 	}
 
-	public void CloseDoor(){
-		doors [1].DOLocalMoveZ (0f, dur);
-		doors [2].DOLocalMoveZ (0f, dur);
-//		anim.SetBool ("open", false);
-		isOpen = false;
+	public void BreakeDoor(){
+		anim.SetBool ("broken", true);
+	}
+
+	public void FixDoor(){
+		anim.SetBool ("broken", false);
 	}
 
 	public void ButtonBehaviour(int p){
+		Debug.Log ("Pulse Received");
 		if (aditivePulses) {
 			receivedPulses += p;
 		} else {
@@ -101,26 +72,28 @@ public class DoorBehaviour : MonoBehaviour {
 		}
 
 		if (receivedPulses >= pulses) {
-			StartCoroutine (OpenDoor ());
+			Debug.Log ("Open");
+			ChangeDoorState ();
 		} else {
 			if (isOpen)
-				CloseDoor ();
+				ChangeDoorState ();
 		}
 	}
 
 	public void SwitchOff(){
-		CloseDoor ();
+		ChangeDoorState ();
 	}
 
 	void OnTriggerExit(Collider col){
 		Debug.Log ("Passed");
-		if (autoClose)
-			StartCoroutine ("IdleClose");
+
+		if (_broken) {
+			FixDoor ();
+		} else if (autoClose) {
+			ChangeDoorState ();
+			col.GetComponent<PlayerController> ().checkPoint = checkPoint.position;
+		}
 	}
 
-	IEnumerator IdleClose(){
-		yield return null;
-		CloseDoor ();
-	}
 }
 
