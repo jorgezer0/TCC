@@ -6,6 +6,7 @@ using UnityEngine;
 public class CameraBlit : MonoBehaviour {
 	
 	public Material mat;
+	[Range(0,2)]
 	public float amount = 0;
 
 	void Update(){
@@ -14,6 +15,6 @@ public class CameraBlit : MonoBehaviour {
 	}
 
 	void OnRenderImage(RenderTexture src, RenderTexture dest) {
-		Graphics.Blit(src, dest, mat);
+		Graphics.Blit (src, dest, mat);
 	}
 }

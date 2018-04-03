@@ -13,6 +13,7 @@ TagManager:
   - Pocket
   - Holder
   - Platform
+  - Water
   layers:
   - Default
   - TransparentFX

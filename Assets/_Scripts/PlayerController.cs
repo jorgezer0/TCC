@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour {
 	public float cursorThreshold;
 	private bool breakCharge = false;
 
-	public Vector3 checkPoint;
+	public Transform checkPoint;
 
     public Text log;
 
@@ -243,7 +243,12 @@ public class PlayerController : MonoBehaviour {
 				canWarp = false;
 				camAnim.SetBool ("play", false);
 				camAnim.SetBool ("arrived", true);
+				CheckFloor ();
 			}
+		}
+
+		if (Input.GetKeyDown (KeyCode.K)) {
+			camAnim.SetTrigger ("dead");
 		}
 	}
 
@@ -275,6 +280,21 @@ public class PlayerController : MonoBehaviour {
 			TimeManager.instance.NormalTime ();
 		}
 		
+	}
+
+	public void GoToCheckPoint(){
+		transform.position = checkPoint.position;
+		transform.rotation = checkPoint.rotation;
+		camAnim.SetBool ("play", false);
+		camAnim.SetBool ("arrived", true);
+	}
+
+	void CheckFloor(){
+		RaycastHit _hit;
+		Physics.Raycast (transform.position, Vector3.down, out _hit, 0.2f);
+		if (_hit.collider.tag == "Water") {
+			camAnim.SetTrigger ("dead");
+		}
 	}
 
 

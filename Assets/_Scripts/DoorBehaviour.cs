@@ -91,7 +91,7 @@ public class DoorBehaviour : MonoBehaviour {
 			FixDoor ();
 		} else if (autoClose) {
 			ChangeDoorState ();
-			col.GetComponent<PlayerController> ().checkPoint = checkPoint.position;
+			col.GetComponent<PlayerController> ().checkPoint = checkPoint;
 		}
 	}
 
