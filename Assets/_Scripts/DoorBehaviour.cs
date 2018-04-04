@@ -84,14 +84,14 @@ public class DoorBehaviour : MonoBehaviour {
 		ChangeDoorState ();
 	}
 
-	void OnTriggerExit(Collider col){
+	public void AutoClose(PlayerController player){
 		Debug.Log ("Passed");
 
 		if (_broken) {
 			FixDoor ();
 		} else if (autoClose) {
 			ChangeDoorState ();
-			col.GetComponent<PlayerController> ().checkPoint = checkPoint;
+			player.checkPoint = checkPoint;
 		}
 	}
 

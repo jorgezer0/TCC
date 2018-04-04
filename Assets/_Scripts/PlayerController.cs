@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour {
 	public Camera cam;
 	public float rotateSpeed = 2;
 	RaycastHit hit;
-	int layerMask = 1 << 0;
+	int layerMask;
 
 	public GameObject cursorCanvas;
 	public GameObject controller;
@@ -56,12 +56,15 @@ public class PlayerController : MonoBehaviour {
 	public float cursorThreshold;
 	private bool breakCharge = false;
 
+	public  DoorBehaviour detectedDoor;
 	public Transform checkPoint;
 
     public Text log;
 
 	// Use this for initialization
 	void Start () {
+		layerMask = LayerMask.GetMask("Default", "Door");
+		Debug.Log (layerMask);
 		Cursor.lockState = CursorLockMode.Locked;
 		tCursor.transform.parent = null;
 
@@ -244,6 +247,10 @@ public class PlayerController : MonoBehaviour {
 				camAnim.SetBool ("play", false);
 				camAnim.SetBool ("arrived", true);
 				CheckFloor ();
+				if (detectedDoor != null) {
+					detectedDoor.AutoClose (this);
+					detectedDoor = null;
+				}
 			}
 		}
 
@@ -254,6 +261,7 @@ public class PlayerController : MonoBehaviour {
 
 	public void StartTeleport(){
 		tDestiny = tCursor.transform.position;
+		detectedDoor = CheckDoor ();
 		camAnim.SetFloat("speed", camAnim.speed / Time.timeScale);
 		camAnim.SetBool ("play", true);
 		camAnim.SetBool ("arrived", false);
@@ -290,11 +298,23 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void CheckFloor(){
-		RaycastHit _hit;
-		Physics.Raycast (transform.position, Vector3.down, out _hit, 0.2f);
-		if (_hit.collider.tag == "Water") {
+		RaycastHit _floorHit;
+		Physics.Raycast (cam.transform.position, Vector3.down, out _floorHit, 5f);
+		if (_floorHit.collider.tag == "Water") {
 			camAnim.SetTrigger ("dead");
 		}
+	}
+
+	private DoorBehaviour CheckDoor(){
+		DoorBehaviour _detectedDoor = null;
+		RaycastHit _doorHit;
+		int layer_mask = LayerMask.GetMask ("Door");
+		if (Physics.Raycast (cam.transform.position, (hit.point - cam.transform.position), out _doorHit, 100f, layer_mask)) {
+			Debug.Log (_doorHit.collider.name);
+			if (_doorHit.collider.isTrigger)
+				_detectedDoor = _doorHit.collider.GetComponent<DoorBehaviour> ();
+		}
+		return _detectedDoor;
 	}
 
 
