@@ -175,7 +175,7 @@ public class PlayerController : MonoBehaviour {
 
 		} else {
 //			Debug.Log ("Controller Disconected!");
-			cursorCanvas.transform.parent = mousePivot;
+			cursorCanvas.transform.SetParent(mousePivot);
 			cursorCanvas.transform.position = mousePivot.position;
 			cursorCanvas.transform.rotation = mousePivot.rotation;
 //			if (controller.activeSelf) {

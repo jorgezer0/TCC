@@ -29,6 +29,7 @@ MonoBehaviour:
   m_Float_keys:
   - pbEditorScroll.x
   - pbEditorScroll.y
+  - pbBevelAmount
   m_String_keys:
   - pbCurrentMaterialPalette
   - pb_UVTemplate_lineColor
@@ -41,6 +42,7 @@ MonoBehaviour:
   m_Float_values:
   - 0
   - 0
+  - 0.1
   m_String_values:
   - Assets/ProCore/ProBuilder/Data/Default Material Palette.asset
   - RGBA(0.963, 0.113, 0.113, 1.000)

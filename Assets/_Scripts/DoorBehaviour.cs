@@ -28,16 +28,22 @@ public class DoorBehaviour : MonoBehaviour {
 	public Transform[] doors;
 	public Transform checkPoint;
 
+	private bool locked = false;
+
 	void Awake(){
 		doors = GetComponentsInChildren<Transform> ();
 	}
 
 	void Start () {
 		anim = GetComponent<Animator> ();
-		if (_open)
-			ChangeDoorState ();
-		if (_broken)
-			BreakeDoor ();
+		if (_open) {
+			if (_broken) {
+				BreakeDoor ();
+			} else {
+				ChangeDoorState ();
+				isOpen = true;
+			}
+		}
 
 	}
 	
@@ -49,10 +55,9 @@ public class DoorBehaviour : MonoBehaviour {
 	}
 
 	public void ChangeDoorState(){
-		
-		anim.SetTrigger ("change");
-		isOpen = true;
-
+		if (!locked) {
+			anim.SetTrigger ("change");
+		}
 	}
 
 	public void BreakeDoor(){
@@ -73,10 +78,17 @@ public class DoorBehaviour : MonoBehaviour {
 
 		if (receivedPulses >= pulses) {
 			Debug.Log ("Open");
-			ChangeDoorState ();
-		} else {
-			if (isOpen)
+			if (_broken) {
+				BreakeDoor ();
+			} else {
 				ChangeDoorState ();
+				isOpen = true;
+			}
+		} else {
+			if (isOpen) {
+				isOpen = false;
+				ChangeDoorState ();
+			}
 		}
 	}
 
@@ -89,9 +101,15 @@ public class DoorBehaviour : MonoBehaviour {
 
 		if (_broken) {
 			FixDoor ();
+			locked = true;
 		} else if (autoClose) {
-			ChangeDoorState ();
-			player.checkPoint = checkPoint;
+			if (isOpen) {
+				ChangeDoorState ();
+				isOpen = false;
+				player.checkPoint = checkPoint;
+//				locked = true;
+				Debug.Log ("Locked!");
+			}
 		}
 	}
 
