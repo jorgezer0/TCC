@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour {
 	int layerMask;
 
 	public GameObject cursorCanvas;
+	public Transform mousePivot;
+	public Transform vrPivot;
 	public GameObject controller;
 	public LineRenderer line;
 	public Transform particleLine;
@@ -88,7 +90,7 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
 		deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
 
-        log.text = OVRInput.GetConnectedControllers().ToString();
+//        log.text = OVRInput.GetConnectedControllers().ToString();
 
         if (!OVRInput.IsControllerConnected (OVRInput.Controller.RTrackedRemote)) {
 			transform.Rotate (0, Input.GetAxis ("Mouse X") * rotateSpeed, 0);
@@ -97,7 +99,9 @@ public class PlayerController : MonoBehaviour {
 
 		if (OVRInput.IsControllerConnected (OVRInput.Controller.RTrackedRemote)) {
 //			Debug.Log ("Controller Conected!");
-			cursorCanvas.SetActive (false);
+			cursorCanvas.transform.parent = vrPivot;
+			cursorCanvas.transform.position = vrPivot.position;
+			cursorCanvas.transform.rotation = vrPivot.rotation;
 			controller.transform.localRotation = OVRInput.GetLocalControllerRotation(OVRInput.Controller.RTrackedRemote);
             
             Debug.DrawRay (rayOrigin.transform.position, rayOrigin.forward);
@@ -143,31 +147,37 @@ public class PlayerController : MonoBehaviour {
 					SlowCountdown ();
                 }
 
-				if ((OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger)) && (hit.collider.tag != "Interact"))
-                {
-					tempCharge += Time.deltaTime;
-					chargeGauge.fillAmount = tempCharge / teleCharge;
-					if (tempCharge >= teleCharge) {
-						canCharge = false;
-						tDestiny = tCursor.transform.position;
-						//StartCoroutine ("TeleportTo");
-						camAnim.Play("TeleportTunel");
-						tempCharge = 0;
-						chargeGauge.fillAmount = 0;
+				if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger)) {
+					if (!chargeGaugeAnim.GetBool ("charge")) {
+						firstPos = tCursor.transform.position;
+						chargeGaugeAnim.SetBool ("charge", true);
+						chargeGaugeAnim.SetBool ("idle", false);
+						chargeGaugeAnim.SetFloat ("speed", chargeGaugeAnim.speed / Time.timeScale);
 					}
-				} else if (tempCharge > 0) {
-					canCharge = true;
-					tempCharge = 0;
-					chargeGauge.fillAmount = 0;
-				} else {
-					canCharge = true;
+
+					lastPos = tCursor.transform.position;
+					cursorDelta = Vector3.Distance(firstPos, lastPos);
+					if (cursorDelta > cursorThreshold){
+						breakCharge = true;
+					}
+				}
+					
+					if ((OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger)) || (breakCharge)){
+					if (chargeGaugeAnim.GetBool ("charge")) {
+						chargeGaugeAnim.SetBool ("charge", false);
+						chargeGaugeAnim.SetBool ("idle", true);
+						chargeGaugeAnim.SetFloat ("speed", -chargeGaugeAnim.speed/2 / Time.timeScale);
+						breakCharge = false;
+					}
 				}
 
             }
 
 		} else {
 //			Debug.Log ("Controller Disconected!");
-			cursorCanvas.SetActive (true);
+			cursorCanvas.transform.parent = mousePivot;
+			cursorCanvas.transform.position = mousePivot.position;
+			cursorCanvas.transform.rotation = mousePivot.rotation;
 //			if (controller.activeSelf) {
 //				controller.SetActive (false);
 //			}
