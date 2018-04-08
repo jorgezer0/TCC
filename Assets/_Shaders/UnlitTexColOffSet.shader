@@ -1,6 +1,4 @@
-﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
-
-Shader "Custom/SimpleUnlitTexturedColoredShader"
+﻿Shader "Custom/SimpleUnlitTexturedColoredShader"
 {
     Properties
     {
@@ -49,9 +47,10 @@ Shader "Custom/SimpleUnlitTexturedColoredShader"
             {
                 v2f o;
                 v.vertex.xyz += v.normal * _Offset;
-                o.vertex = UnityObjectToClipPos(v.vertex);
+
+				o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = v.uv;
-                return o;
+        		return o;
             }
             
 

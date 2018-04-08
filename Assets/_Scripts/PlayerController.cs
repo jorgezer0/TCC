@@ -98,13 +98,12 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		if (OVRInput.IsControllerConnected (OVRInput.Controller.RTrackedRemote)) {
+
 //			Debug.Log ("Controller Conected!");
 			cursorCanvas.transform.parent = vrPivot;
 			cursorCanvas.transform.position = vrPivot.position;
 			cursorCanvas.transform.rotation = vrPivot.rotation;
 			controller.transform.localRotation = OVRInput.GetLocalControllerRotation(OVRInput.Controller.RTrackedRemote);
-            
-            Debug.DrawRay (rayOrigin.transform.position, rayOrigin.forward);
 
 			if (Physics.Raycast (rayOrigin.position, rayOrigin.forward, out hit, distance, layerMask, QueryTriggerInteraction.Ignore))
             {
@@ -249,7 +248,6 @@ public class PlayerController : MonoBehaviour {
 		if (canWarp) {
 			pProces.motionBlur.enabled = true;
 			transform.position = Vector3.SmoothDamp (transform.position, tDestiny, ref vel, warpTime * Time.timeScale);
-//			transform.LookAt (focusManager.GetFocus ());
 			Vector3 normalize = new Vector3 (0, transform.rotation.eulerAngles.y, 0);
 			transform.rotation = Quaternion.Euler (normalize);
 			if (Vector3.Distance (transform.position, tDestiny) < 0.15f) {
@@ -297,7 +295,6 @@ public class PlayerController : MonoBehaviour {
 			timeGaugeAnim.SetBool ("slow", false);
 			TimeManager.instance.NormalTime ();
 		}
-		
 	}
 
 	public void GoToCheckPoint(){

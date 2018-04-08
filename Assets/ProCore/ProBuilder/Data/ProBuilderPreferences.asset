@@ -18,6 +18,8 @@ MonoBehaviour:
   - pbDragSelectWholeElement
   - pb_UVTemplate_transparentBackground
   - pb_UVTemplate_hideGrid
+  - pb_SmoothingGroupEditor::m_DrawNormals
+  - pb_SmoothingGroupEditor::m_ShowPreview
   m_Int_keys:
   - pbDefaultEditLevel
   - pbDefaultSelectionMode
@@ -37,7 +39,7 @@ MonoBehaviour:
   - pbVertexColorPrefs4
   m_Color_keys: []
   m_Material_keys: []
-  m_Bool_values: 010000000101
+  m_Bool_values: 0100000001010101
   m_Int_values: 00000000010000000100000000000000000000000004000000000000
   m_Float_values:
   - 0

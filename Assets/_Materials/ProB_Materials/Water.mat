@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Water
-  m_Shader: {fileID: 4800000, guid: b27ab65a8fb5c3845bcedade498a3861, type: 3}
+  m_Shader: {fileID: 4800000, guid: 7fd99d897fea6134080fb01d4232596e, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -39,13 +39,17 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 9470468fda72f4773a90a0306decbf0f, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: 975a52586941e354daca0d64874c038b, type: 3}
+        m_Scale: {x: 0.2, y: 0.2}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _NoiseTexture:
+        m_Texture: {fileID: 2800000, guid: d2995c736efa33048839d3030fcd3370, type: 3}
+        m_Scale: {x: 0.2, y: 0.2}
+        m_Offset: {x: 0.073130086, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -64,6 +68,8 @@ Material:
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 0
+    - _NoiseIntensity: 1
+    - _NoiseOscilation: 1
     - _OcclusionStrength: 1
     - _Offset: -0.25
     - _Parallax: 0.02
@@ -75,3 +81,5 @@ Material:
     m_Colors:
     - _Color: {r: 0.5441177, g: 0.46156186, b: 0.19204153, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _MainColor: {r: 0.5218736, g: 1, b: 0.4669811, a: 1}
+    - _SecondaryColor: {r: 0.082366906, g: 0.2264151, b: 0, a: 1}
