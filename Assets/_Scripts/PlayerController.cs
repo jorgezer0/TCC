@@ -291,7 +291,7 @@ public class PlayerController : MonoBehaviour {
 			timeGaugeAnim.SetBool ("full", false);
 			timeGaugeAnim.SetBool ("slow", true);
 		} else {
-			timeGaugeAnim.SetFloat ("speed", -0.5f);
+			timeGaugeAnim.SetFloat ("speed", -2f);
 			timeGaugeAnim.SetBool ("slow", false);
 			TimeManager.instance.NormalTime ();
 		}

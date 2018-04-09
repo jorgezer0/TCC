@@ -20,7 +20,7 @@ public class TimeGaugeEvents : MonoBehaviour {
 	}
 
 	public void Revert(){
-		anim.SetFloat ("speed", -0.5f);
+		anim.SetFloat ("speed", -2f);
 		anim.SetBool ("slow", false);
 		TimeManager.instance.NormalTime ();
 	}
