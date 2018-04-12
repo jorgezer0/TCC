@@ -17,6 +17,9 @@ public class SwitchTimed : MonoBehaviour {
 	public Color offColor;
 	public MeshRenderer line;
 	public MeshRenderer display;
+	public bool playAudio;
+	public RoomAudioBehaviour room;
+	public int audioId;
 
 	// Use this for initialization
 	void Start () {
@@ -64,5 +67,12 @@ public class SwitchTimed : MonoBehaviour {
 		yield return new WaitForSeconds (timer);
 		on = !on;
 		Revert ();
+	}
+
+	private void PlayAudio(){
+		if (playAudio) {
+			room.PlayInSpeakers (audioId);
+			playAudio = false;
+		}
 	}
 }

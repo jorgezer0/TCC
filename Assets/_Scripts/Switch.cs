@@ -6,6 +6,8 @@ using DG.Tweening;
 public class Switch : MonoBehaviour {
 
 	public GameObject attachedTo;
+	public GameObject[] areasToEnable;
+	public GameObject[] areasToDisable;
 	public int pulse;
 	public bool on = false;
 	public float onPos;
@@ -16,6 +18,9 @@ public class Switch : MonoBehaviour {
 	public Color offColor;
 	public MeshRenderer line;
 	public MeshRenderer display;
+	public bool playAudio;
+	public RoomAudioBehaviour room;
+	public int audioId;
 
 	// Use this for initialization
 	void Start () {
@@ -41,6 +46,7 @@ public class Switch : MonoBehaviour {
 			line.material.DOColor (onColor, dur);
 			display.material.DOColor (onColor, dur);
 			attachedTo.BroadcastMessage ("ButtonBehaviour", pulse);
+			ToggleAreas ();
 		} else {
 			switchTransform.DOLocalMoveY (-onPos, dur);
 			switchRenderer.material.DOColor (offColor, dur);
@@ -53,6 +59,26 @@ public class Switch : MonoBehaviour {
 	public void ButtonBehaviour(int p){
 		if (on) {
 			attachedTo.BroadcastMessage ("ButtonBehaviour", pulse + p);
+		}
+	}
+
+	private void ToggleAreas(){
+		if (areasToEnable.Length > 0) {
+			for (int i = 0; i < areasToEnable.Length; i++) {
+				areasToEnable [i].SetActive (true);
+			}
+		}
+		if (areasToDisable.Length > 0) {
+			for (int i = 0; i < areasToDisable.Length; i++) {
+				areasToDisable [i].SetActive (false);
+			}
+		}
+	}
+
+	private void PlayAudio(){
+		if (playAudio) {
+			room.PlayInSpeakers (audioId);
+			playAudio = false;
 		}
 	}
 }

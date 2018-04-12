@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69d40e9b28a2a4f41b91253e5111f67a, type: 3}
+  m_Name: AudioData
+  m_EditorClassIdentifier: 
+  room:
+  - audio:
+    - {fileID: 8300000, guid: 5dc1dcbdae68f88489f094b157a88315, type: 3}
+  - audio:
+    - {fileID: 8300000, guid: bd2842d075811b24f9ae27023133b373, type: 3}
+    - {fileID: 8300000, guid: 5b1778da9d98b3144bb0e0917d69bd26, type: 3}
+  - audio: []
+  - audio: []
+  - audio: []
+  - audio: []
+  - audio: []
+  - audio: []
+  - audio: []
+  - audio: []
+  - audio: []
+  - audio: []
+  - audio: []
+  - audio: []
+  - audio: []
+  - audio: []
+  - audio: []
+  - audio: []
+  - audio: []
+  - audio: []
+  - audio: []
+  - audio: []
+  - audio: []
+  - audio: []
+  - audio: []
+  - audio: []
+  - audio: []
+  - audio: []
+  - audio: []
