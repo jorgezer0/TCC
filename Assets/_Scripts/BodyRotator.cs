@@ -13,7 +13,6 @@ public class BodyRotator : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		_time = Time.deltaTime / Time.timeScale;
-		Debug.Log (Vector3.Angle (transform.forward, cam.forward));
 
 		if (Vector3.Angle (transform.forward, cam.forward) > 25f) {
 			transform.localRotation = Quaternion.Lerp (transform.localRotation, cam.localRotation, _time * followSpeed);

@@ -23,7 +23,6 @@ GameObject:
   - component: {fileID: 23634467006499910}
   - component: {fileID: 33472550066126138}
   - component: {fileID: 114242840424234596}
-  - component: {fileID: 64812808804870676}
   m_Layer: 0
   m_Name: Curve_Out
   m_TagString: Untagged
@@ -84,20 +83,6 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1390839481640656}
-  m_Mesh: {fileID: 0}
---- !u!64 &64812808804870676
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1390839481640656}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
   m_Mesh: {fileID: 0}
 --- !u!114 &114242840424234596
 MonoBehaviour:

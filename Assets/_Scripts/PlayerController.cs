@@ -17,11 +17,15 @@ public class PlayerController : MonoBehaviour {
 	public Transform mousePivot;
 	public Transform vrPivot;
 	public GameObject controller;
+	public Transform canon;
+	public Transform fore_arm;
+	public Transform arm;
 	public LineRenderer line;
 	public Transform particleLine;
 	public Transform rayOrigin;
+	public Transform lineOrigin;
 
-	public GameObject tCursor;
+	public TCursorBehaviour tCursor;
 	private Vector3 tCursor_velocity = Vector3.zero;
 	private Vector3 tDestiny = Vector3.zero;
 	float deltaTime;
@@ -60,6 +64,7 @@ public class PlayerController : MonoBehaviour {
 
 	public  DoorBehaviour detectedDoor;
 	public Transform checkPoint;
+	private bool isDead = false;
 
     public Text log;
 
@@ -77,13 +82,6 @@ public class PlayerController : MonoBehaviour {
 
 		camAnim = cam.GetComponent<Animator> ();
 		camBlit = cam.GetComponent<CameraBlit> ();
-		glitch = cam.GetComponent<AnalogGlitch> ();
-		vignette = cam.GetComponent<Vignette> ();
-		bloom = cam.GetComponent<Bloom> ();
-//		pProces = cam.GetComponent<PostProcessingProfile> ();
-		ppBloom = pProces.bloom.settings;
-		ppChromatic = pProces.chromaticAberration.settings;
-		ppVignette = pProces.vignette.settings;
 	}
 
 	// Update is called once per frame
@@ -103,39 +101,38 @@ public class PlayerController : MonoBehaviour {
 			cursorCanvas.transform.parent = vrPivot;
 			cursorCanvas.transform.position = vrPivot.position;
 			cursorCanvas.transform.rotation = vrPivot.rotation;
+
 			controller.transform.localRotation = OVRInput.GetLocalControllerRotation(OVRInput.Controller.RTrackedRemote);
+
+			Quaternion controllerRot = OVRInput.GetLocalControllerRotation(OVRInput.Controller.RTrackedRemote);
+
+			canon.localRotation = Quaternion.Euler (0, 0, controllerRot.eulerAngles.z);
+			fore_arm.localRotation = Quaternion.Euler (controllerRot.eulerAngles.x, controllerRot.eulerAngles.y, 0);
+			arm.localRotation = Quaternion.Euler (arm.localEulerAngles.x, arm.localEulerAngles.y, fore_arm.localEulerAngles.y);
 
 			if (Physics.Raycast (rayOrigin.position, rayOrigin.forward, out hit, distance, layerMask, QueryTriggerInteraction.Ignore))
             {
-                line.SetPosition(1, hit.point);
-
-                line.SetPosition (0, rayOrigin.position);
-
-                if (!tCursor.activeSelf) {
-					tCursor.SetActive (true);
-				}
+				line.SetPosition (1, hit.point);
+				line.SetPosition (0, lineOrigin.position);
 
 				if (hit.collider.tag == "Wall") {
+					ToggleLine (true);
 					Vector3 wallHit = hit.point - ((hit.point - rayOrigin.transform.position).normalized * wallOffset);
-					tCursor.transform.localPosition = Vector3.SmoothDamp (tCursor.transform.position, new Vector3(wallHit.x, 0, wallHit.z), ref tCursor_velocity, 0.1f * Time.timeScale);
-				} else {
+					tCursor.transform.localPosition = Vector3.SmoothDamp (tCursor.transform.position, new Vector3 (wallHit.x, 0, wallHit.z), ref tCursor_velocity, 0.1f * Time.timeScale);
+				} else if (hit.collider.tag == "Floor") {
+					ToggleLine (true);
 					tCursor.transform.localPosition = Vector3.SmoothDamp (tCursor.transform.position, new Vector3 (hit.point.x, 0, hit.point.z), ref tCursor_velocity, 0.1f * Time.timeScale);
+				} else {
+					ToggleLine (false);
 				}
 
                 //Interact with interactables.
                 if (hit.collider.tag == "Interact")
                 {
-                    tCursor.SetActive(false);
+					tCursor.gameObject.SetActive(false);
                     if ((OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger)) && ((hit.collider.transform.position - transform.position).magnitude < 3))
                     {
                         hit.collider.BroadcastMessage("InteracBehaviour");
-                    }
-                }
-                else
-                {
-                    if (!tCursor.activeSelf)
-                    {
-                        tCursor.SetActive(true);
                     }
                 }
 
@@ -147,7 +144,7 @@ public class PlayerController : MonoBehaviour {
                 }
 
 				if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger)) {
-					if (!chargeGaugeAnim.GetBool ("charge")) {
+					if ((!chargeGaugeAnim.GetBool ("charge")) && (canCharge)) {
 						firstPos = tCursor.transform.position;
 						chargeGaugeAnim.SetBool ("charge", true);
 						chargeGaugeAnim.SetBool ("idle", false);
@@ -181,31 +178,29 @@ public class PlayerController : MonoBehaviour {
 //				controller.SetActive (false);
 //			}
 			if (Physics.Raycast (cam.transform.position, cam.transform.forward, out hit, distance, layerMask, QueryTriggerInteraction.Ignore)) {
-//			Debug.DrawLine (cam.transform.position, hit.point, Color.red, 2f);
-
-				line.SetPosition (0, rayOrigin.position);
-				//				tCursor.transform.position = hit.point;
-				if (!tCursor.activeSelf) {
-					tCursor.SetActive (true);
-				}
+				line.SetPosition (0, lineOrigin.position);
 
 				if (hit.collider.tag == "Wall") {
+					ToggleLine (true);
 					Vector3 wallHit = hit.point - ((hit.point - rayOrigin.transform.position).normalized * wallOffset);
-					tCursor.transform.position = Vector3.SmoothDamp (tCursor.transform.position, new Vector3(wallHit.x, 0, wallHit.z), ref tCursor_velocity, 0.1f * Time.timeScale);
+					tCursor.TCursorAdjustedPos (wallHit);
+				} else if (hit.collider.tag == "Floor") {
+					ToggleLine (true);
+					tCursor.TCursorAdjustedPos (hit.point);
 				} else {
-					tCursor.transform.position = Vector3.SmoothDamp (tCursor.transform.position, new Vector3 (hit.point.x, 0, hit.point.z), ref tCursor_velocity, 0.1f * Time.timeScale);
+					ToggleLine (false);
 				}
 
 				//Interact with interactables.
 				if (hit.collider.tag == "Interact") {
-					tCursor.SetActive (false);
+					tCursor.gameObject.SetActive (false);
 					if ((Input.GetMouseButtonDown (0)) && (hit.collider.transform.position - transform.position).magnitude < 3){
 						hit.collider.BroadcastMessage ("InteracBehaviour");
 					}
 				} else {
-					if (!tCursor.activeSelf) {
-						tCursor.SetActive (true);
-					}
+//					if (!tCursor.activeSelf) {
+//						tCursor.SetActive (true);
+//					}
 				}
 
 //				tCursor.transform.position = new Vector3(hit.point.x, 0, hit.point.z);
@@ -221,7 +216,7 @@ public class PlayerController : MonoBehaviour {
                 }
 
 				if (Input.GetMouseButton (0)) {
-					if (!chargeGaugeAnim.GetBool ("charge")) {
+					if ((!chargeGaugeAnim.GetBool ("charge")) && (canCharge)) {
 						firstPos = tCursor.transform.position;
 						chargeGaugeAnim.SetBool ("charge", true);
 						chargeGaugeAnim.SetBool ("idle", false);
@@ -245,37 +240,45 @@ public class PlayerController : MonoBehaviour {
 
             }
 		}
+
 		if (canWarp) {
-			pProces.motionBlur.enabled = true;
 			transform.position = Vector3.SmoothDamp (transform.position, tDestiny, ref vel, warpTime * Time.timeScale);
 			Vector3 normalize = new Vector3 (0, transform.rotation.eulerAngles.y, 0);
 			transform.rotation = Quaternion.Euler (normalize);
 			if (Vector3.Distance (transform.position, tDestiny) < 0.15f) {
 				canWarp = false;
-				camAnim.SetBool ("play", false);
-				camAnim.SetBool ("arrived", true);
-				CheckFloor ();
+//				camAnim.SetBool ("play", false);
+				camAnim.SetTrigger ("arrived_");
 				if (detectedDoor != null) {
 					detectedDoor.AutoClose (this);
 					detectedDoor = null;
 				}
 			}
+		} else {
+			CheckFloor ();
 		}
 
-		if (Input.GetKeyDown (KeyCode.K)) {
-			camAnim.SetTrigger ("dead");
+	}
+
+	private void ToggleLine(bool toggle){
+		if (canCharge != toggle) {
+			tCursor.gameObject.SetActive (toggle);
+			canCharge = toggle;
 		}
+		line.endColor = toggle ? Color.green : Color.red;
 	}
 
 	public void StartTeleport(){
+		Debug.Log ("Start Teleport!");
 		tDestiny = tCursor.transform.position;
 		detectedDoor = CheckDoor ();
 		camAnim.SetFloat("speed", camAnim.speed / Time.timeScale);
-		camAnim.SetBool ("play", true);
-		camAnim.SetBool ("arrived", false);
+		camAnim.SetTrigger ("play_");
+//		camAnim.SetBool ("arrived", false);
 	}
 
 	public void Teleport(){
+		Debug.Log ("Can Warp!");
 		canWarp = true;
 	}
 
@@ -300,15 +303,21 @@ public class PlayerController : MonoBehaviour {
 	public void GoToCheckPoint(){
 		transform.position = checkPoint.position;
 		transform.rotation = checkPoint.rotation;
-		camAnim.SetBool ("play", false);
-		camAnim.SetBool ("arrived", true);
+
+		camAnim.SetTrigger ("arrived_");
+		isDead = false;
 	}
 
 	void CheckFloor(){
-		RaycastHit _floorHit;
-		Physics.Raycast (cam.transform.position, Vector3.down, out _floorHit, 5f);
-		if (_floorHit.collider.tag == "Water") {
-			camAnim.SetTrigger ("dead");
+		if (!isDead) {
+			RaycastHit _floorHit;
+			Physics.Raycast (cam.transform.position, transform.up * -1, out _floorHit, 10f);
+			if ((_floorHit.collider.tag == "Water")) {
+				isDead = true;
+				canWarp = false;
+				tDestiny = checkPoint.position;
+				camAnim.SetTrigger ("dead_");
+			}
 		}
 	}
 
@@ -323,58 +332,6 @@ public class PlayerController : MonoBehaviour {
 		}
 		return _detectedDoor;
 	}
-
-
-//	IEnumerator TeleportTo(){
-//		float step = 0.01f;
-//		bool grow = true;
-//		int speed = 3;
-//		while (step > 0) {
-//			if (grow) {
-//				step += (Time.deltaTime/Time.timeScale) * speed;
-//			} else {					 
-//				step -= (Time.deltaTime/Time.timeScale) * speed*2;
-//			}
-//			camBlit.amount = step * 2;
-//			glitch.enabled = true;
-//			glitch.scanLineJitter = step/2;
-//			glitch.colorDrift = step/4;
-////			bloom.intensity = step*10;
-////			vignette.intensity = step;
-//			ppBloom.bloom.intensity = step;
-//			ppChromatic.intensity = step;
-//			ppVignette.intensity = step;
-//			pProces.bloom.settings = ppBloom;
-//			pProces.chromaticAberration.settings = ppChromatic;
-//			pProces.vignette.settings = ppVignette;
-//			if (step >= 1) {
-//				grow = false;
-////				transform.position = tCursor.transform.position;
-//			}
-//			if (step >= 0.5f) {
-//				canWarp = true;
-//			}
-//
-//			yield return new WaitForSeconds (Time.deltaTime);
-//		}
-//		pProces.motionBlur.enabled = false;
-//		camBlit.amount = 0;
-//		glitch.scanLineJitter = 0;
-//		glitch.horizontalShake = 0;
-//		glitch.colorDrift = 0;
-//		glitch.enabled = false;
-////		bloom.intensity = 0;
-////		vignette.intensity = 0;
-//		ppBloom.bloom.intensity = 0;
-//		ppChromatic.intensity = 0;
-//		ppVignette.intensity = 0;
-//		canWarp = false;
-//		pProces.bloom.settings = ppBloom;
-//		pProces.chromaticAberration.settings = ppChromatic;
-//		pProces.vignette.settings = ppVignette;
-//		yield return null;
-//	}
-
-    
+		    
 }
 
